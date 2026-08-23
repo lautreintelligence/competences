@@ -1,0 +1,23 @@
+{
+  "skill_name": "sprezzatura",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Comment je négocie une augmentation avec mon manager ? C'est la première fois, je sais pas comment m'y prendre.",
+      "expected_output": "Une explication qui donne à la fois les étapes concrètes de préparation et de conduite de la conversation, ET les raisons qui rendent chaque étape efficace — le tout tissé naturellement sans séparation visible.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Explique-moi comment fonctionne le DNS. Genre quand je tape google.com, qu'est-ce qui se passe vraiment ?",
+      "expected_output": "Une explication technique qui couvre le processus complet de résolution DNS avec les étapes concrètes ET les raisons architecturales/mécaniques derrière chaque étape — tissées ensemble.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Comment fixer le prix d'un nouveau produit SaaS ? On lance dans 2 mois et on a aucune idée de comment pricer.",
+      "expected_output": "Une explication qui donne une méthode actionnable de pricing ET les principes économiques/psychologiques qui expliquent pourquoi chaque approche fonctionne — tissés ensemble.",
+      "files": []
+    }
+  ]
+}

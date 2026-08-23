@@ -1,0 +1,68 @@
+{
+  "name": "competences",
+  "interface": {
+    "displayName": "Competences"
+  },
+  "plugins": [
+    {
+      "name": "aien-communication-pro",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aien-communication-pro"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE",
+        "products": [
+          "CODEX"
+        ]
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "aien-strategies",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aien-strategies"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE",
+        "products": [
+          "CODEX"
+        ]
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "aien-thinking",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aien-thinking"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE",
+        "products": [
+          "CODEX"
+        ]
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "aien-dev",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aien-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE",
+        "products": [
+          "CODEX"
+        ]
+      },
+      "category": "development"
+    }
+  ]
+}

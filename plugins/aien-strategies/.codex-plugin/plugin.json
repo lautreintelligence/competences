@@ -1,0 +1,36 @@
+{
+  "name": "aien-strategies",
+  "version": "0.1.0",
+  "description": "Skills de preparation aux entretiens de conseil en strategie et d'evaluation d'idees de business.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "conseil",
+    "entretien",
+    "strategie"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AIEN Strategies",
+    "shortDescription": "Preparation aux entretiens de conseil en strategie.",
+    "longDescription": "Cinq skills couvrant la preparation aux entretiens de conseil en strategie : simulation d'entretien de cas, generation et audit d'une banque de cas, entretien de personnalite, et evaluation d'une idee de business reelle en pyramide de Minto.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "defaultPrompt": [
+      "Fais-moi passer un entretien de cas.",
+      "Prepare-moi a un entretien de personnalite.",
+      "Evalue cette idee de business avec la methode Minto."
+    ]
+  }
+}

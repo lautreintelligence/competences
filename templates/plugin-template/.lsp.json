@@ -1,0 +1,13 @@
+{
+  "example-language": {
+    "command": "example-language-server",
+    "extensionToLanguage": {
+      ".exl": "example-language"
+    },
+    "args": ["--stdio"],
+    "transport": "stdio",
+    "startupTimeout": 5000,
+    "restartOnCrash": true,
+    "diagnostics": true
+  }
+}

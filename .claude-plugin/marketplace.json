@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "competences",
+  "description": "Les competences professionnelles, mises dans les mains de vos equipes par l'Intelligence Artificielle.",
+  "owner": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "plugins": [
+    {
+      "name": "aien-communication-pro",
+      "source": "./plugins/aien-communication-pro",
+      "displayName": "AIEN Communication Pro",
+      "description": "Skills de redaction et de communication professionnelle.",
+      "category": "productivity",
+      "tags": [
+        "communication",
+        "redaction",
+        "email"
+      ]
+    },
+    {
+      "name": "aien-strategies",
+      "source": "./plugins/aien-strategies",
+      "displayName": "AIEN Strategies",
+      "description": "Skills de preparation aux entretiens de conseil en strategie et d'evaluation d'idees de business.",
+      "category": "productivity",
+      "tags": [
+        "conseil",
+        "entretien",
+        "strategie"
+      ]
+    },
+    {
+      "name": "aien-thinking",
+      "source": "./plugins/aien-thinking",
+      "displayName": "AIEN Thinking",
+      "description": "Skills de raisonnement, d'explication et de mise en forme de la pensee.",
+      "category": "productivity",
+      "tags": [
+        "raisonnement",
+        "explication",
+        "redaction"
+      ]
+    },
+    {
+      "name": "aien-dev",
+      "source": "./plugins/aien-dev",
+      "displayName": "AIEN Dev",
+      "description": "Skills techniques : audit de lisibilite du code et extraction de specification d'interface.",
+      "category": "development",
+      "tags": [
+        "code",
+        "audit",
+        "interface"
+      ]
+    }
+  ],
+  "renames": {
+    "communication-professionnelle": "aien-communication-pro"
+  }
+}

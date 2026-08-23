@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "aien-communication-pro",
+  "displayName": "AIEN Communication Pro",
+  "version": "0.3.0",
+  "description": "Skills de redaction et de communication professionnelle.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "communication",
+    "redaction"
+  ],
+  "defaultEnabled": true,
+  "skills": [
+    "./skills/"
+  ]
+}

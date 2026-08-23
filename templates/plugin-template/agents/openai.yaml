@@ -1,0 +1,5 @@
+# Metadonnees d'agent Codex
+name: example-agent
+description: Quand deleguer a ce sous-agent.
+instructions: |
+  System prompt du sous-agent.

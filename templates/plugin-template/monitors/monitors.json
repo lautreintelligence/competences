@@ -1,0 +1,8 @@
+[
+  {
+    "name": "example-monitor",
+    "command": "tail -f /dev/null",
+    "description": "Processus de veille en arriere-plan. Sessions interactives uniquement.",
+    "when": "always"
+  }
+]

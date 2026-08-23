@@ -1,0 +1,35 @@
+{
+  "name": "aien-dev",
+  "version": "0.1.0",
+  "description": "Skills techniques : audit de lisibilite du code et extraction de specification d'interface.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "code",
+    "audit",
+    "interface"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AIEN Dev",
+    "shortDescription": "Audit de code et specification d'interface.",
+    "longDescription": "Deux skills techniques : un audit de lisibilite du code contre les six principes du Clean Code, avec score pondere et exemples de refactoring, et un extracteur qui transforme une interface — URL ou capture d'ecran — en specification technique reproductible.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "development",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "defaultPrompt": [
+      "Audite la lisibilite de ce code.",
+      "Transforme cette interface en specification technique."
+    ]
+  }
+}

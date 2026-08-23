@@ -1,0 +1,7 @@
+{
+  "apps": {
+    "example-app": {
+      "id": "example-connector-id"
+    }
+  }
+}

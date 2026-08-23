@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo "executable ajoute au PATH du Bash a l activation du plugin"

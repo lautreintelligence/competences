@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "example-server": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/example-server",
+      "args": [],
+      "env": {},
+      "timeout": 30000
+    }
+  }
+}

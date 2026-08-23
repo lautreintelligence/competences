@@ -1,0 +1,34 @@
+{
+  "name": "plugin-template",
+  "version": "0.1.0",
+  "description": "Gabarit de depart. Renommer, puis supprimer tout composant non utilise.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "template"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "Plugin Template",
+    "shortDescription": "Gabarit de depart pour un plugin multi-harness.",
+    "longDescription": "Structure complete couvrant Claude Code et Codex. Chaque composant est optionnel : supprimer ce qui n'est pas utilise avant publication.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "development",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "defaultPrompt": [
+      "Execute le workflow d'exemple."
+    ]
+  }
+}
