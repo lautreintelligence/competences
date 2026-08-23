@@ -27,8 +27,8 @@ Le ROME — Répertoire Opérationnel des Métiers et des Emplois de France Trav
 
 | Plugin | Enjeu ROME | Invocation d'une skill |
 |---|---|---|
-| `communication` | Communication, Multimédia | `/communication:fitz` |
-| `organisation` | Organisation | `/organisation:mece-checklist` |
+| `communication` | Communication, Multimédia | `/communication:email-diplomatique` |
+| `organisation` | Organisation | `/organisation:checklist-sans-oubli` |
 | `transmission` | Conseil, Transmission | `/transmission:sprezzatura` |
 | `strategie` | Stratégie de développement | `/strategie:minto` |
 | `carriere` | Développement des compétences | `/carriere:case-partner` |

@@ -11,7 +11,7 @@ Structurer un problème, décomposer un projet, distiller une session de travail
 | `brainstorm` | `/organisation:brainstorm` | Orchestre une table ronde à sept rôles cognitifs et sort des solutions classées sur applicabilité, effort et impact. |
 | `synthese-de-conversation` | `/organisation:synthese-de-conversation` | Distille une session de travail en note markdown datée : décisions prises, questions ouvertes, prochaines étapes. |
 
-`session-digest` écrit une note dans le répertoire indiqué par l'utilisateur ; à défaut, dans `./notes/` à la racine du répertoire de travail.
+`synthese-de-conversation` écrit une note dans le répertoire indiqué par l'utilisateur ; à défaut, dans `./notes/` à la racine du répertoire de travail.
 
 ## Composants
 
