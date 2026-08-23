@@ -1,0 +1,26 @@
+{
+  "name": "technologie",
+  "version": "1.0.0",
+  "description": "Auditer la lisibilite du code et extraire la specification d'une interface.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "code",
+    "audit",
+    "interface"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Technologie",
+    "shortDescription": "Auditer la lisibilite du code et extraire la specification d'une interface.",
+    "longDescription": "Deux skills techniques : un audit de code contre les six principes du Clean Code, avec score pondere et exemples de refactoring, et un extracteur qui transforme une interface en specification reproductible.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "development",
+    "websiteURL": "https://github.com/lautreintelligence/competences"
+  }
+}

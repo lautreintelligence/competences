@@ -37,7 +37,7 @@ Ce dépôt en exige quatre.
 | Clé de `metadata` | Statut | Contrainte |
 |---|---|---|
 | `version` | requis | chaîne |
-| `author` | requis | chaîne, `AIEN` par défaut |
+| `author` | requis | chaîne, `L'Autre Intelligence & Nous` par défaut |
 | `tags` | requis | liste de chaînes, **trois au maximum** |
 
 `metadata` est un objet libre. Il accueille les champs que le protocole refuse au premier
@@ -52,7 +52,7 @@ description: >
 license: Apache-2.0
 metadata:
   version: "0.1.0"
-  author: "AIEN"
+  author: "L'Autre Intelligence & Nous"
   tags: ["email", "redaction", "communication"]
 ---
 ```
@@ -72,7 +72,7 @@ autrement : `references/<sujet>.md`.
 ## Ajouter un plugin
 
 1. Choisir le nom selon [docs/conventions-de-nommage.md](docs/conventions-de-nommage.md) :
-   `aien-<domaine>`. Il est immuable après publication.
+   un enjeu de compétences du ROME, en un mot, sans préfixe. Il est immuable après publication.
 2. Copier `templates/plugin-template/` sous `plugins/<plugin-name>/`.
 3. Remplacer `plugin-template` par le nom dans les deux manifestes.
 4. Supprimer tout composant inutilisé, et retirer la clé correspondante des manifestes.

@@ -1,0 +1,26 @@
+{
+  "name": "organisation",
+  "version": "1.0.0",
+  "description": "Structurer un probleme, decomposer un projet, distiller une session de travail.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "organisation",
+    "mece",
+    "methode"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Organisation",
+    "shortDescription": "Structurer un probleme, decomposer un projet, distiller une session de travail.",
+    "longDescription": "Quatre skills pour mettre de l'ordre : formuler une problematique rigoureuse, decomposer un projet en checklist MECE, explorer un sujet a plusieurs voix, et distiller une session de travail en note datee.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "productivity",
+    "websiteURL": "https://github.com/lautreintelligence/competences"
+  }
+}

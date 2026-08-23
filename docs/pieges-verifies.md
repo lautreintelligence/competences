@@ -193,11 +193,11 @@ settings.json             enabledPlugins: {}
 ~/.claude/plugins/        20 Ko
 ```
 
-125 skills continuent de répondre, servies par quatorze plugins dont `aien-thinking`, `aien-strategies`, `marketing` et `data`. Aucun de ces plugins n'apparaît dans `installed_plugins.json`, ni dans `plugin-catalog-cache.json`, ni dans `settings.json`.
+125 skills continuent de répondre, servies par quatorze plugins dont `organisation`, `carriere`, `marketing` et `data`. Aucun de ces plugins n'apparaît dans `installed_plugins.json`, ni dans `plugin-catalog-cache.json`, ni dans `settings.json`.
 
 **Conséquence.** L'état du plan compte ne se lit pas sur le disque. Une commande, un script d'inventaire ou un agent qui inspecte `~/.claude/plugins/` mesure le seul plan local et conclut à tort que rien n'est installé.
 
-**À faire.** Pour savoir ce que le compte sert, lire la liste des skills exposées dans une session interactive. Un nom préfixé — `aien-thinking:brainstorm` — vient d'un plugin. Un nom sans préfixe vient du répertoire local des skills.
+**À faire.** Pour savoir ce que le compte sert, lire la liste des skills exposées dans une session interactive. Un nom préfixé — `organisation:brainstorm` — vient d'un plugin. Un nom sans préfixe vient du répertoire local des skills.
 
 **Prise en compte.** Le plan compte exige un redémarrage complet de l'application. Le plan local est immédiat.
 

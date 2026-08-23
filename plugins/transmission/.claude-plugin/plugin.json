@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "transmission",
+  "displayName": "Transmission",
+  "version": "1.0.0",
+  "description": "Expliquer, transmettre une competence, verifier un raisonnement.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "pedagogie",
+    "explication",
+    "transmission"
+  ],
+  "defaultEnabled": true,
+  "skills": [
+    "./skills/"
+  ]
+}
