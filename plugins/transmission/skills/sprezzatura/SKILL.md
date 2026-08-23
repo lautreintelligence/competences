@@ -1,7 +1,7 @@
 ---
 name: sprezzatura
 description: >
-  Sprezzatura — Explications complètes qui tissent naturellement le « comment faire » et le « pourquoi ça marche ». Utilise ce skill dès qu'un utilisateur demande d'expliquer comment quelque chose fonctionne, de transmettre une compétence, d'enseigner une méthode, de détailler une stratégie, de former quelqu'un, ou quand il dit « explique-moi », « comment je fais pour », « apprends-moi », « pourquoi ça marche comme ça », « montre-moi comment », « je veux comprendre X en profondeur ». Aussi quand l'utilisateur veut une explication qui rende autonome — pas juste un résumé ou une définition, mais une compréhension qui permette d'agir ET d'adapter. Ne pas confondre avec `first-principles` (qui part du concret vers l'abstrait) : Sprezzatura vise la complétude opérationnelle, pas la trajectoire pédagogique.
+  Sprezzatura — Explications complètes qui tissent naturellement le « comment faire » et le « pourquoi ça marche ». Utilise ce skill dès qu'un utilisateur demande d'expliquer comment quelque chose fonctionne, de transmettre une compétence, d'enseigner une méthode, de détailler une stratégie, de former quelqu'un, ou quand il dit « explique-moi », « comment je fais pour », « apprends-moi », « pourquoi ça marche comme ça », « montre-moi comment », « je veux comprendre X en profondeur ». Aussi quand l'utilisateur veut une explication qui rende autonome — pas juste un résumé ou une définition, mais une compréhension qui permette d'agir ET d'adapter. Ne pas confondre avec `vulgarisation` (qui part du concret vers l'abstrait) : Sprezzatura vise la complétude opérationnelle, pas la trajectoire pédagogique.
 license: Apache-2.0
 metadata:
   version: "0.1.0"

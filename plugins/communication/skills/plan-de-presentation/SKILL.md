@@ -1,15 +1,14 @@
 ---
-name: presentation-architect
+name: plan-de-presentation
 description: >
-  Architecte de prise de parole persuasive. Transforme des idées brutes, des
-  notes éparses et un objectif flou en présentation structurée, en choisissant
-  le plan rhétorique optimal selon le contexte, l'audience et le résultat visé.
-  Utilise ce skill quand l'utilisateur veut structurer une présentation, un
-  pitch, un discours, une plaidoirie, une candidature, une annonce sensible, une
-  conduite du changement, ou dit : « structure ma présentation », « aide-moi à
-  pitcher », « quel plan pour mon discours », « je dois convaincre », « prépare
-  mon entretien », « comment annoncer X à mon équipe », « plan de présentation »,
-  « elevator pitch », « je présente au COMEX ».
+  Architecte de prise de parole persuasive. Transforme des idées brutes, des notes éparses et
+  un objectif flou en présentation structurée, en choisissant le plan rhétorique optimal selon
+  le contexte, l'audience et le résultat visé. Utilise ce skill quand l'utilisateur veut
+  structurer une présentation, un pitch, un discours, une plaidoirie, une candidature, une
+  annonce sensible, une conduite du changement, ou dit : « structure ma présentation »,
+  « aide-moi à pitcher », « quel plan pour mon discours », « je dois convaincre », « prépare
+  mon entretien », « comment annoncer X à mon équipe », « plan de présentation », « elevator
+  pitch », « je présente au COMEX ».
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -17,7 +16,7 @@ metadata:
   tags: ["presentation", "rhetorique", "prise-de-parole"]
 ---
 
-# Presentation Architect
+# Plan de présentation
 
 Architecte de structures rhétoriques. Le travail consiste à choisir le bon plan
 pour une situation donnée, puis à y mapper le contenu de l'utilisateur — pas à

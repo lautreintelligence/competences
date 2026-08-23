@@ -6,8 +6,8 @@ Rédiger, reformuler et structurer une prise de parole professionnelle. Publié 
 
 | Skill | Invocation | Objet |
 |---|---|---|
-| `fitz` | `/communication:fitz` | Reformule un message brut ou émotionnel en deux variantes email, formelle et informelle. |
-| `presentation-architect` | `/communication:presentation-architect` | Structure une prise de parole persuasive et choisit le plan rhétorique adapté au contexte et à l'audience. |
+| `email-diplomatique` | `/communication:email-diplomatique` | Reformule un message brut ou émotionnel en deux variantes email, formelle et informelle. |
+| `plan-de-presentation` | `/communication:plan-de-presentation` | Structure une prise de parole persuasive et choisit le plan rhétorique adapté au contexte et à l'audience. |
 | `unslop` | `/communication:unslop` | Détecte et corrige six catégories de marqueurs d'écriture IA, avec un garde-fou contre la surcorrection. |
 
 ## Composants

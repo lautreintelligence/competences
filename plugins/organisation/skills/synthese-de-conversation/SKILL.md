@@ -1,6 +1,11 @@
 ---
-name: session-digest
-description: "Distiller une conversation longue (brainstorm, session de travail, exploration) en une note propre avec conclusions et next steps. Sauvegarde la note dans le repertoire indique par l'utilisateur, sinon ./notes/ a la racine du repertoire de travail. Trigger : /session-digest, ou quand l'utilisateur dit 'tldr', 'fais le point', 'resume la session', 'distille la conversation'."
+name: synthese-de-conversation
+description: >
+  Distille une conversation longue (brainstorm, session de travail, exploration) en une note
+  propre avec conclusions et next steps. Sauvegarde la note dans le répertoire indiqué par
+  l'utilisateur, sinon ./notes/ à la racine du répertoire de travail. Utilise ce skill quand
+  l'utilisateur dit « /synthese-de-conversation », « tldr », « fais le point », « résume la
+  session », « distille la conversation ».
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -8,7 +13,7 @@ metadata:
   tags: ["synthese", "notes", "conversation"]
 ---
 
-# Session Digest — Distillateur de conversation
+# Synthèse de conversation
 
 Relire l'integralite de la conversation en cours, en extraire l'essentiel, et sauvegarder une note markdown propre dans le repertoire de notes de l'utilisateur.
 
@@ -16,14 +21,14 @@ Relire l'integralite de la conversation en cours, en extraire l'essentiel, et sa
 
 1. Scanner toute la conversation — identifier les sujets abordes, les decisions prises, les questions restees ouvertes, les idees generees.
 2. Structurer la note selon le format ci-dessous.
-3. Generer un nom de fichier : `YYYY-MM-DD-digest-<sujet-court>.md` (ex: `2026-04-22-digest-pricing-strategy.md`).
+3. Generer un nom de fichier : `YYYY-MM-DD-synthese-<sujet-court>.md` (ex: `2026-04-22-synthese-pricing-strategy.md`).
 4. Sauvegarder dans le repertoire indique par l'utilisateur. A defaut, `./notes/` a la racine du repertoire de travail — creer le dossier s'il n'existe pas.
 5. Afficher un resume court a l'utilisateur avec le chemin du fichier cree.
 
 ## Format de la note
 
 ```markdown
-# Digest — <Sujet>
+# Synthèse — <Sujet>
 
 Date : YYYY-MM-DD
 Projet : <nom du projet si identifiable>

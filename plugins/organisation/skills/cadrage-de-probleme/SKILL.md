@@ -1,6 +1,11 @@
 ---
-name: problem-framing
-description: "Utiliser lorsque l'utilisateur demande d'analyser un problème complexe, mentionne une anomalie systémique, cherche la cause racine d'une tension, ou souhaite formuler une problématique rigoureuse."
+name: cadrage-de-probleme
+description: >
+  Traite tout problème complexe comme une anomalie au sein d'un système : extrait le signal,
+  divise les forces via le principe MECE, et fige l'espace de résolution. Utilise ce skill
+  lorsque l'utilisateur demande d'analyser un problème complexe, mentionne une anomalie
+  systémique, cherche la cause racine d'une tension, ou souhaite formuler une problématique
+  rigoureuse.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -8,6 +13,8 @@ metadata:
   tags: ["mece", "diagnostic", "problematique"]
 ---
  
+# Cadrage de problème
+
 Ce skill traite tout problème complexe comme une **anomalie** au sein d'un système. L'objectif est d'extraire le **signal**, de diviser les forces via le principe **MECE** et de figer l'espace de résolution.
  
 ## Étapes

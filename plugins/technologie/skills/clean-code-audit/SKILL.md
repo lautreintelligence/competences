@@ -1,6 +1,12 @@
 ---
 name: clean-code-audit
-description: Perform Clean Code audits based on Robert C. Martin's 6 principles (naming, functions, comments, formatting, error handling, DRY). Use when the user asks to audit code, review code quality, check for clean code violations, evaluate technical debt, or improve code readability. Returns structured reports with severity scoring (🔴 Critical/🟠 Major/🟡 Minor), concrete refactoring examples, and prioritized recommendations.
+description: >
+  Réalise des audits Clean Code selon les 6 principes de Robert C. Martin (nommage, fonctions,
+  commentaires, formatage, gestion d'erreur, DRY). Utilise ce skill quand l'utilisateur demande
+  d'auditer du code, de relire la qualité d'un code, de vérifier les violations de clean code,
+  d'évaluer la dette technique, ou d'améliorer la lisibilité du code. Retourne des rapports
+  structurés avec notation de sévérité (🔴 Critique / 🟠 Majeur / 🟡 Mineur), des exemples
+  concrets de refactoring et des recommandations priorisées.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
