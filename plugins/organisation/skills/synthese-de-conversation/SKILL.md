@@ -56,5 +56,5 @@ Projet : <nom du projet si identifiable>
 - La note doit etre comprehensible dans 3 mois sans le contexte de la conversation.
 - Ne pas inclure les tatonnements, les fausses pistes abandonnees, ou les echanges de coordination. Seulement ce qui a survecu.
 - Si la conversation portait sur du code : inclure les fichiers modifies et les choix techniques dans les conclusions.
-- Si un argument de l'utilisateur a fourni des user arguments en appelant /session-digest, les traiter comme indication du sujet ou du perimetre a distiller.
+- Si l'utilisateur a fourni des arguments en appelant /synthese-de-conversation, les traiter comme indication du sujet ou du perimetre a distiller.
 - Pas de frontmatter YAML, pas de tags, pas de wikilinks. Markdown pur.

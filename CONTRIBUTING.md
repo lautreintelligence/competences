@@ -45,7 +45,7 @@ niveau — `version`, `homepage`, `argument-hint` — sans sortir du spec.
 
 ```yaml
 ---
-name: fitz
+name: email-diplomatique
 description: >
   Ce que la skill produit. Utiliser quand les situations qui doivent la déclencher
   se présentent.
