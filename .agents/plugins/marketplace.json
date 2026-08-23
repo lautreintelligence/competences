@@ -8,7 +8,7 @@
       "name": "communication",
       "source": {
         "source": "local",
-        "path": "plugins/communication"
+        "path": "./plugins/communication"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -23,7 +23,7 @@
       "name": "organisation",
       "source": {
         "source": "local",
-        "path": "plugins/organisation"
+        "path": "./plugins/organisation"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -38,7 +38,7 @@
       "name": "transmission",
       "source": {
         "source": "local",
-        "path": "plugins/transmission"
+        "path": "./plugins/transmission"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -53,7 +53,7 @@
       "name": "strategie",
       "source": {
         "source": "local",
-        "path": "plugins/strategie"
+        "path": "./plugins/strategie"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -68,7 +68,7 @@
       "name": "carriere",
       "source": {
         "source": "local",
-        "path": "plugins/carriere"
+        "path": "./plugins/carriere"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -83,7 +83,7 @@
       "name": "technologie",
       "source": {
         "source": "local",
-        "path": "plugins/technologie"
+        "path": "./plugins/technologie"
       },
       "policy": {
         "installation": "AVAILABLE",

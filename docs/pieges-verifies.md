@@ -235,3 +235,24 @@ Sur un poste mesuré, six marketplaces retirés de Claude Code ont laissé 474 M
 **Ce qui n'est pas établi.** Que Codex charge ces skills en session. La commande réussit et les fichiers sont là ; le chargement effectif n'a pas été mesuré.
 
 **À faire.** Ne pas conclure de la réussite d'une installation qu'un composant fonctionne. Pour un plugin destiné aux deux harnesses, écrire les deux manifestes.
+
+## 18. Codex exige le préfixe `./` dans le chemin de source
+
+**Observé.** Dans `.agents/plugins/marketplace.json`, un chemin de source écrit sans préfixe rend le marketplace entier invisible pour Codex.
+
+| Valeur de `source.path` | `codex plugin list` |
+|---|---|
+| `"./plugins/mon-plugin"` | le marketplace et ses plugins apparaissent |
+| `"plugins/mon-plugin"` | **le marketplace n'apparaît pas du tout** |
+
+Aucun message d'erreur à l'ajout : `codex plugin marketplace add` réussit, `codex plugin marketplace list` montre bien le marketplace et sa racine, le clone contient tous les fichiers. Seul `codex plugin list` l'omet, et `codex plugin add` répond `plugin <nom> was not found in marketplace <nom>`.
+
+**Le piège.** L'erreur ne désigne pas sa cause. Elle laisse croire à un problème de nom de plugin ou à un catalogue périmé, alors que la déclaration du chemin est seule en cause.
+
+**À écrire.** Toujours le préfixe, dans les deux catalogues :
+
+```json
+"source": { "source": "local", "path": "./plugins/<nom>" }
+```
+
+Claude Code accepte les deux formes ; Codex n'en accepte qu'une.
