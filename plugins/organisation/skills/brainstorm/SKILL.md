@@ -1,6 +1,14 @@
 ---
 name: brainstorm
-description: "Orchestrate structured brainstorming sessions with 7 distinct expert roles (Facilitator, Optimist, Observer, Counterpoint, Innovator, Solution Seeker, Reflective Thinker). Use when the user wants to: (1) brainstorm ideas on any topic, (2) explore a subject from multiple perspectives, (3) generate creative solutions with built-in critical analysis, (4) run a simulated roundtable discussion, or (5) get a structured ideation session with ranked actionable solutions. Triggered by '/brainstorm [topic]' or any request to brainstorm, ideate, or explore ideas systematically."
+description: >
+  Orchestre des sessions de brainstorming structurées avec 7 rôles d'experts distincts
+  (Facilitateur, Optimiste, Observateur, Contrepoint, Innovateur, Chercheur de solutions,
+  Penseur réflexif). Utilise ce skill quand l'utilisateur veut : (1) brainstormer des idées
+  sur n'importe quel sujet, (2) explorer un sujet sous plusieurs perspectives, (3) générer
+  des solutions créatives avec une analyse critique intégrée, (4) mener une discussion en
+  table ronde simulée, ou (5) obtenir une session d'idéation structurée avec des solutions
+  classées et actionnables. Déclenché par « /brainstorm [sujet] » ou toute demande de
+  brainstormer, d'idéer, ou d'explorer des idées systématiquement.
 license: Apache-2.0
 metadata:
   version: "0.1.0"

@@ -1,6 +1,14 @@
 ---
-name: mece-checklist
-description: "Expert en decomposition MECE (Mutuellement Exclusif, Collectivement Exhaustif) pour creer des checklists structurees et exhaustives pour tout type de projet. Garantit zero doublon et zero oubli via des frameworks reconnus. Use when the user wants to: (1) creer une checklist pour un projet, (2) decomposer un projet complexe en taches actionnables, (3) verifier l'exhaustivite d'un plan d'action, (4) structurer un lancement, une migration, un evenement ou tout processus multi-etapes, (5) detecter les angles morts d'un plan existant. Triggers: '/mece-checklist', 'checklist', 'liste de taches', 'decomposer mon projet', 'todo list projet', 'angles morts', 'rien oublier'."
+name: checklist-sans-oubli
+description: >
+  Expert en décomposition MECE (Mutuellement Exclusif, Collectivement Exhaustif) pour créer
+  des checklists structurées et exhaustives pour tout type de projet. Garantit zéro doublon et
+  zéro oubli via des frameworks reconnus. Utilise ce skill quand l'utilisateur veut : (1) créer
+  une checklist pour un projet, (2) décomposer un projet complexe en tâches actionnables,
+  (3) vérifier l'exhaustivité d'un plan d'action, (4) structurer un lancement, une migration,
+  un événement ou tout processus multi-étapes, (5) détecter les angles morts d'un plan
+  existant. Déclencheurs : « /checklist-sans-oubli », « checklist », « liste de tâches »,
+  « décomposer mon projet », « todo list projet », « angles morts », « rien oublier ».
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -8,7 +16,7 @@ metadata:
   tags: ["mece", "checklist", "gestion-projet"]
 ---
 
-# MECE-Checklist - Architecte de l'Exhaustivite Structuree
+# Checklist sans oubli
 
 ## Identite
 

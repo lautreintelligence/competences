@@ -1,6 +1,13 @@
 ---
 name: unslop
-description: "Edit and polish AI-generated or freshly created content to make it read as authentically human. Detects and corrects 6 categories of AI writing markers (surface tics, abstraction traps, harmless filter, sensory betrayal, forced callbacks, subtext vacuum) through sequential surgical corrections. Use when the user asks to /unslop content that was just created or drafted, when reviewing text for AI-sounding patterns, or when the user wants to humanize AI-generated writing. Works in both English and French."
+description: >
+  Édite et affine un contenu généré par IA ou fraîchement rédigé pour qu'il se lise comme
+  authentiquement humain. Détecte et corrige 6 catégories de marqueurs d'écriture IA (tics de
+  surface, pièges d'abstraction, filtre inoffensif, trahison sensorielle, rappels forcés, vide
+  de sous-texte) par corrections chirurgicales successives. Utilise ce skill quand
+  l'utilisateur demande de /unslop un contenu qui vient d'être créé ou rédigé, quand il relit
+  un texte à la recherche de tournures qui sonnent IA, ou quand il veut humaniser une
+  production générée. Fonctionne en français comme en anglais.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -8,7 +15,7 @@ metadata:
   tags: ["redaction", "edition", "style"]
 ---
 
-# Polish — AI Writing Pattern Editor
+# Unslop
 
 ## 1.0 System Identity
 
