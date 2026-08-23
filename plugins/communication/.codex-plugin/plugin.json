@@ -1,0 +1,26 @@
+{
+  "name": "communication",
+  "version": "1.0.0",
+  "description": "Rediger, reformuler et structurer une prise de parole professionnelle.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "communication",
+    "redaction",
+    "presentation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Communication",
+    "shortDescription": "Rediger, reformuler et structurer une prise de parole professionnelle.",
+    "longDescription": "Trois skills pour ecrire au travail : reformuler un message brut en email diplomatique, structurer une presentation persuasive, et purger un texte de ses tics d'ecriture machine.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "productivity",
+    "websiteURL": "https://github.com/lautreintelligence/competences"
+  }
+}

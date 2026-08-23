@@ -1,0 +1,26 @@
+{
+  "name": "strategie",
+  "version": "1.0.0",
+  "description": "Evaluer une idee de business et rendre une recommandation argumentee.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "strategie",
+    "business-case",
+    "recommandation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Strategie",
+    "shortDescription": "Evaluer une idee de business et rendre une recommandation argumentee.",
+    "longDescription": "Evalue une idee de business, produit, service ou investissement en case candidate-led, et rend une recommandation GO ou NO-GO en pyramide de Minto.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "productivity",
+    "websiteURL": "https://github.com/lautreintelligence/competences"
+  }
+}

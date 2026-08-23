@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "strategie",
+  "displayName": "Strategie",
+  "version": "1.0.0",
+  "description": "Evaluer une idee de business et rendre une recommandation argumentee.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "strategie",
+    "business-case",
+    "recommandation"
+  ],
+  "defaultEnabled": true,
+  "skills": [
+    "./skills/"
+  ]
+}

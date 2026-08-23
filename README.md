@@ -1,83 +1,64 @@
 # competences
 
-Marketplace d'**AIEN**. Il sert Claude Code et Codex depuis le même dépôt.
+**Les compétences professionnelles, mises dans les mains de vos équipes par l'Intelligence Artificielle.**
 
-## Pour un agent qui arrive ici
+Marketplace de plugins pour Claude Code et Codex, publié par
+[L'Autre Intelligence & Nous](https://github.com/lautreintelligence), association loi 1901.
 
-Lire dans cet ordre, avant toute modification :
-
-| Document | Ce qu'il fixe |
-|---|---|
-| [docs/conventions-de-nommage.md](docs/conventions-de-nommage.md) | noms de marketplace, de plugin et de skill — immuables après publication |
-| [docs/pieges-verifies.md](docs/pieges-verifies.md) | dix comportements mesurés qui contredisent la documentation courante |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | contrat de frontmatter, procédure d'ajout, validations obligatoires |
-| [docs/gabarit-de-repo-marketplace-multi-harness.md](docs/gabarit-de-repo-marketplace-multi-harness.md) | spécification complète des manifestes et des composants |
-
-`docs/pieges-verifies.md` évite de refaire des erreurs déjà payées. Le lire avant d'écrire
-un manifeste, pas après un échec de validation.
-
-## Structure
-
-```
-competences/
-├── .claude-plugin/marketplace.json     catalogue Claude Code — name: competences
-├── .agents/plugins/marketplace.json    catalogue Codex
-├── plugins/
-│   ├── aien-communication-pro/         fitz, presentation-architect
-│   ├── aien-strategies/                case-partner, case-generator, case-auditor,
-│   │                                   pei-interviewer, minto
-│   ├── aien-thinking/                  problem-framing, brainstorm, doublecheck,
-│   │                                   mece-checklist, first-principles, sprezzatura,
-│   │                                   unslop, session-digest
-│   └── aien-dev/                       clean-code-audit, ui-to-spec
-├── templates/
-│   ├── plugin-template/                gabarit complet, deux harnesses
-│   └── skill-template/
-├── scripts/validate-skills.py          contrôle le contrat de frontmatter
-└── docs/
-```
+Nous ne vous expliquons pas l'intelligence artificielle. Nous vous la mettons dans les mains,
+sous la forme de compétences prêtes à l'emploi : rédiger, structurer un problème, expliquer,
+préparer un entretien, auditer du code.
 
 ## Installation
 
+Ajoutez le marketplace, puis installez les plugins qui servent votre travail.
+
 ```
 /plugin marketplace add lautreintelligence/competences
-/plugin install aien-communication-pro@competences
-/plugin install aien-strategies@competences
-/plugin install aien-thinking@competences
-/plugin install aien-dev@competences
+/plugin install communication@competences
 ```
 
 ```
 codex plugin marketplace add lautreintelligence/competences
-codex plugin add aien-communication-pro
-codex plugin add aien-strategies
-codex plugin add aien-thinking
-codex plugin add aien-dev
+codex plugin add communication@competences
 ```
 
-Un plugin installé est une copie réelle sous `~/.claude/plugins/cache/`. Les skills se
-chargent hors ligne ; seules l'installation et la mise à jour demandent le réseau.
+Un plugin installé est une copie réelle sur votre machine. Les compétences se chargent hors
+ligne ; seules l'installation et la mise à jour demandent le réseau.
 
-## Plugins
+## Les six plugins
 
-| Plugin | Installation | Skills |
+| Plugin | Installation | Ce qu'il vous donne |
 |---|---|---|
-| [`aien-communication-pro`](plugins/aien-communication-pro/README.md) | `/plugin install aien-communication-pro@competences` | Rédaction et communication professionnelle — 2 skills |
-| [`aien-strategies`](plugins/aien-strategies/README.md) | `/plugin install aien-strategies@competences` | Préparation aux entretiens de conseil en stratégie — 5 skills |
-| [`aien-thinking`](plugins/aien-thinking/README.md) | `/plugin install aien-thinking@competences` | Raisonner, expliquer, mettre en forme la pensée — 8 skills |
-| [`aien-dev`](plugins/aien-dev/README.md) | `/plugin install aien-dev@competences` | Audit de code et spécification d'interface — 2 skills |
+| [`communication`](plugins/communication/README.md) | `/plugin install communication@competences` | Rédiger, reformuler, structurer une prise de parole — 3 compétences |
+| [`organisation`](plugins/organisation/README.md) | `/plugin install organisation@competences` | Structurer un problème, décomposer un projet, distiller une session — 4 compétences |
+| [`transmission`](plugins/transmission/README.md) | `/plugin install transmission@competences` | Expliquer, transmettre, vérifier un raisonnement — 3 compétences |
+| [`strategie`](plugins/strategie/README.md) | `/plugin install strategie@competences` | Évaluer une idée de business et trancher — 1 compétence |
+| [`carriere`](plugins/carriere/README.md) | `/plugin install carriere@competences` | Préparer les entretiens de conseil en stratégie — 4 compétences |
+| [`technologie`](plugins/technologie/README.md) | `/plugin install technologie@competences` | Auditer du code, extraire une spécification d'interface — 2 compétences |
 
-Le README de chaque plugin décrit ses skills, leur invocation et ce qu'elles produisent.
+Le README de chaque plugin décrit ses compétences, comment les appeler et ce qu'elles produisent.
 
-## Avant de pousser
+## Comment c'est organisé
 
-Les six validations doivent passer :
+Les plugins suivent les **enjeux de compétences du ROME**, le répertoire des métiers de France
+Travail. Un professionnel y retrouve le vocabulaire de son propre parcours plutôt qu'un
+découpage technique.
 
-```bash
-uv run scripts/validate-skills.py
-claude plugin validate plugins/aien-communication-pro
-claude plugin validate plugins/aien-strategies
-claude plugin validate plugins/aien-thinking
-claude plugin validate plugins/aien-dev
-claude plugin validate .
 ```
+competences/
+├── plugins/          six plugins, dix-sept compétences
+├── templates/        gabarits pour en écrire de nouvelles
+├── scripts/          contrôle de conformité
+└── docs/             conventions et spécifications
+```
+
+## Contribuer
+
+La procédure, le contrat de rédaction et les règles de nommage sont dans
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licence
+
+[Apache-2.0](LICENSE). Usage commercial libre, modification libre, redistribution libre.
+L'attribution est décrite dans [NOTICE](NOTICE).

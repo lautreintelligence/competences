@@ -8,46 +8,70 @@
   },
   "plugins": [
     {
-      "name": "aien-communication-pro",
-      "source": "./plugins/aien-communication-pro",
-      "displayName": "AIEN Communication Pro",
-      "description": "Skills de redaction et de communication professionnelle.",
+      "name": "communication",
+      "source": "./plugins/communication",
+      "displayName": "Communication",
+      "description": "Rediger, reformuler et structurer une prise de parole professionnelle.",
       "category": "productivity",
       "tags": [
         "communication",
         "redaction",
-        "email"
+        "presentation"
       ]
     },
     {
-      "name": "aien-strategies",
-      "source": "./plugins/aien-strategies",
-      "displayName": "AIEN Strategies",
-      "description": "Skills de preparation aux entretiens de conseil en strategie et d'evaluation d'idees de business.",
+      "name": "organisation",
+      "source": "./plugins/organisation",
+      "displayName": "Organisation",
+      "description": "Structurer un probleme, decomposer un projet, distiller une session de travail.",
       "category": "productivity",
       "tags": [
-        "conseil",
-        "entretien",
-        "strategie"
+        "organisation",
+        "mece",
+        "methode"
       ]
     },
     {
-      "name": "aien-thinking",
-      "source": "./plugins/aien-thinking",
-      "displayName": "AIEN Thinking",
-      "description": "Skills de raisonnement, d'explication et de mise en forme de la pensee.",
+      "name": "transmission",
+      "source": "./plugins/transmission",
+      "displayName": "Transmission",
+      "description": "Expliquer, transmettre une competence, verifier un raisonnement.",
       "category": "productivity",
       "tags": [
-        "raisonnement",
+        "pedagogie",
         "explication",
-        "redaction"
+        "transmission"
       ]
     },
     {
-      "name": "aien-dev",
-      "source": "./plugins/aien-dev",
-      "displayName": "AIEN Dev",
-      "description": "Skills techniques : audit de lisibilite du code et extraction de specification d'interface.",
+      "name": "strategie",
+      "source": "./plugins/strategie",
+      "displayName": "Strategie",
+      "description": "Evaluer une idee de business et rendre une recommandation argumentee.",
+      "category": "productivity",
+      "tags": [
+        "strategie",
+        "business-case",
+        "recommandation"
+      ]
+    },
+    {
+      "name": "carriere",
+      "source": "./plugins/carriere",
+      "displayName": "Carriere",
+      "description": "Preparer les entretiens de conseil en strategie et construire sa banque de cas.",
+      "category": "productivity",
+      "tags": [
+        "entretien",
+        "conseil",
+        "preparation"
+      ]
+    },
+    {
+      "name": "technologie",
+      "source": "./plugins/technologie",
+      "displayName": "Technologie",
+      "description": "Auditer la lisibilite du code et extraire la specification d'une interface.",
       "category": "development",
       "tags": [
         "code",
@@ -55,8 +79,5 @@
         "interface"
       ]
     }
-  ],
-  "renames": {
-    "communication-professionnelle": "aien-communication-pro"
-  }
+  ]
 }

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "communication",
+  "displayName": "Communication",
+  "version": "1.0.0",
+  "description": "Rediger, reformuler et structurer une prise de parole professionnelle.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "communication",
+    "redaction",
+    "presentation"
+  ],
+  "defaultEnabled": true,
+  "skills": [
+    "./skills/"
+  ]
+}

@@ -6,7 +6,7 @@ description: >
 license: Apache-2.0
 metadata:
   version: "0.1.0"
-  author: "AIEN"
+  author: "L'Autre Intelligence & Nous"
   tags: ["domaine-a", "domaine-b", "domaine-c"]   # 3 maximum
 ---
 
