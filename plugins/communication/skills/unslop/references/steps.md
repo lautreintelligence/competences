@@ -8,6 +8,7 @@
 - [Step 3 — Sensory Betrayal](#step-3--sensory-betrayal)
 - [Step 4 — Forced Callbacks](#step-4--forced-callbacks)
 - [Step 5 — Subtext Vacuum](#step-5--subtext-vacuum)
+- [Step 6 — Absolute Formulations](#step-6--absolute-formulations)
 - [Complete Worked Example](#complete-worked-example-full-transformation-steps-05)
 
 ---
@@ -255,6 +256,63 @@ the image.
 - ✅ "Elle détourna le regard."
 
 🔴 TRUST THE READER. Subtext is a gift, not a gap to fill.
+
+---
+
+## Step 6 — Absolute Formulations
+
+AI states things more categorically than the evidence warrants. It turns a spectrum into a binary, credits one cause where several act, and adds clauses that shut down objections before they arise. The phrasing sounds authoritative and often says something the writer couldn't defend. A reader who knows the subject thinks *"yes, but sometimes…"* and trusts the rest of the text less.
+
+**The core rule**: Every assertion should claim only as much as it can defend. When a sentence asserts more than the writer could hold against one honest counter-example, calibrate it down while keeping its conviction.
+
+This is rarely lexical. The obvious words — *always, never, everyone, no one* — are the easy case. The harder version is structural: the absolute sits in the grammar rather than in a single word.
+
+**The decisive test (self-evaluation)**: For each strong claim, ask three questions.
+1. **Counter-example** — could a reasonable reader name one case where this is false? (*"yes, but sometimes…"*)
+2. **Second cause** — does it credit a single cause, lever, or factor where several plausibly act? (*"not only that…"*)
+3. **Closed door** — does it disqualify objections in advance? (*"whatever is claimed / in any case / no matter what"*)
+
+A yes to any of the three means the claim is overclaimed. Rewrite it to state the real scope.
+
+**The five moves to catch** — this is where the subtlety lives:
+
+| Move | What it does | Example → calibrated |
+|------|--------------|----------------------|
+| **Totalization** | *everything / all / any / none* fused into the syntax, claiming full scope | "it shapes **everything** we build" → "it shapes **most of** what we build" |
+| **Reduction to one** | one cause, lever, or claim where reality is plural | "success is decided **by** the data" → "success is decided **largely by** the data" |
+| **Binary verdict** | forces a yes/no on a matter of degree | "the system **is not** secure" → "the system **has serious** security gaps" |
+| **Closing clause** | a phrase that disqualifies objection in advance | "it fails, **whatever is claimed for it**" → "it fails **on the cases we tested**" |
+| **Framing superlative** | unearned *the most / the widest / the single most important* | "**the** decisive factor" → "**a** decisive factor" |
+
+**Calibration tools** — lower the claim without limping:
+- Bound the scope: *most, often, in the cases that matter, for this kind of work* (not the vague *maybe, perhaps, it seems*).
+- Restore plurality: *one of the levers, a large part of, among the reasons*.
+- Turn a verdict into a magnitude: *"hard enough that few manage it"* rather than *"impossible."*
+- Cut the closing clause. It usually carries tone and no information.
+- Demote *the → a*, *the most important → an important*.
+
+🔴 **Guardrail — do not over-hedge (tension with Step 2).** This step is about accuracy, not about softening the text into caution. Two ways it goes wrong:
+- **Hedge stacking**: *"it may perhaps sometimes tend to…"*. One qualifier calibrates a claim; piling up three drains it. Use the fewest words that make the claim true.
+- **Killing an earned absolute**: some absolutes are exact — *"water boils at 100°C at sea level," "the deadline is Friday," "no user should see another user's password."* A claim that survives the three tests stays as written.
+
+Step 2 and Step 6 divide the labor: Step 2 adds force where the text is anesthetized, Step 6 removes force where the text overclaims. A calibrated text still takes clear positions. It stops short of claiming more than it can hold.
+
+**EN Examples:**
+- ❌ "This changes everything about how teams work." → ✅ "This changes how a lot of teams work day to day."
+- ❌ "The only way to fix it is to start over." → ✅ "The cleanest fix is to start over; patching it would be slower than it looks."
+- ❌ "No one reads the documentation." → ✅ "Most people skip the documentation."
+- ❌ "A system trained on unverifiable data is not adopted responsibly, whatever is claimed for it." → ✅ "A system trained on unverifiable data is hard to call responsibly adopted, however it's presented."
+
+**FR Examples:**
+- ❌ « L'IA va transformer tous les métiers. » → ✅ « L'IA va transformer une bonne partie des métiers. »
+- ❌ « C'est LA condition d'une adoption responsable. » → ✅ « C'est une des conditions d'une adoption responsable. »
+- ❌ « Cette méthode fonctionne à tous les coups. » → ✅ « Cette méthode tient dans la plupart des cas. »
+- ❌ « Ce qui décide, ce n'est pas l'outil, c'est le savoir. » → ✅ « Ce qui pèse le plus, c'est moins l'outil que le savoir. »
+
+**Actions:**
+- The absolute survives the three tests → keep it, it's earned.
+- The absolute fails one test → apply the matching calibration tool, minimal change.
+- You can't calibrate without inventing a scope you don't know → cut the quantifier instead of replacing it (*"everything we build"* → *"what we build"*).
 
 ---
 
