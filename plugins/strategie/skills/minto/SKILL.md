@@ -14,9 +14,9 @@ description: >
   (case-generator) : ici l'idée est réelle et c'est toi le consultant.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["business-case", "conseil-strategie", "recommandation"]
+  tags: "business-case, conseil-strategie, recommandation"
 ---
 
 # Minto — Consultant en stratégie

@@ -378,9 +378,11 @@ Portabilité du frontmatter :
 
 Toute clé hors des six du spec fait échouer l'envoi vers claude.ai et vers la Skills API. Le validateur exige `name` et `description`, limite `name` à 64 caractères en kebab-case strict, `description` à 1024 caractères sans chevron, et `compatibility` à 500 caractères.
 
-Claude Code tolère des clés hors spec. Un relevé de 373 `SKILL.md` installées en montre six : `user-invocable` (151), `argument-hint` (140), `version` (139), `homepage` (12), `tools` (2), `disable-model-invocation` (1). Elles ferment la porte à claude.ai. `metadata` est un objet libre : y loger ces valeurs conserve la portabilité.
+Claude Code tolère des clés hors spec. Un relevé de 373 `SKILL.md` installées en montre six : `user-invocable` (151), `argument-hint` (140), `version` (139), `homepage` (12), `tools` (2), `disable-model-invocation` (1). Elles ferment la porte à claude.ai. Les clés supplémentaires de `metadata` doivent avoir des valeurs de type chaîne, conformément au [standard Agent Skills](https://agentskills.io/specification#metadata-field).
 
-Ce dépôt exige quatre champs — `name`, `description`, `license`, `metadata` — et trois clés sous `metadata` : `version`, `author`, `tags`, ce dernier limité à trois valeurs. Voir [CONTRIBUTING.md](../CONTRIBUTING.md).
+Ce dépôt exige quatre champs — `name`, `description`, `license`, `metadata` — et trois clés sous `metadata` : `version`, `author`, `tags`.
+Ces trois valeurs sont des chaînes non vides. `tags` contient un à trois tags séparés par des virgules, par exemple `tags: "redaction, edition, style"`.
+Voir [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ### 6.2 Hooks
 

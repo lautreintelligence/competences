@@ -11,9 +11,9 @@ description: >
   fois où ». NE PAS l'utiliser pour les études de cas — c'est le rôle de case-partner.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["fit-interview", "conseil-strategie", "entretien"]
+  tags: "fit-interview, conseil-strategie, entretien"
 ---
 
 # PEI Interviewer — Personal Experience Interview McKinsey

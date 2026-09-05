@@ -27,21 +27,21 @@ Ce dépôt en exige quatre.
 
 | Champ | Statut | Contrainte |
 |---|---|---|
-| `name` | requis par le protocole | kebab-case strict, 64 caractères, identique au nom du dossier |
-| `description` | requis par le protocole | 1024 caractères, aucun chevron `<` ou `>` |
-| `license` | requis par ce dépôt | identifiant SPDX — `Apache-2.0` pour ce dépôt |
-| `metadata` | requis par ce dépôt | objet portant `version`, `author` et `tags` |
-| `allowed-tools` | facultatif | — |
-| `compatibility` | facultatif | 500 caractères |
+| `name` | requis par le protocole | chaîne non vide, kebab-case strict, 64 caractères, identique au nom du dossier |
+| `description` | requis par le protocole | chaîne non vide, 1024 caractères, aucun chevron `<` ou `>` |
+| `license` | requis par ce dépôt | chaîne non vide — `Apache-2.0` pour ce dépôt |
+| `metadata` | requis par ce dépôt | clés et valeurs de type chaîne ; `version`, `author` et `tags` requis |
+| `allowed-tools` | facultatif | chaîne non vide, noms d'outils séparés par des espaces |
+| `compatibility` | facultatif | chaîne non vide, 500 caractères |
 
 | Clé de `metadata` | Statut | Contrainte |
 |---|---|---|
-| `version` | requis | chaîne |
-| `author` | requis | chaîne, `L'Autre Intelligence & Nous` par défaut |
-| `tags` | requis | liste de chaînes, **trois au maximum** |
+| `version` | requis | chaîne non vide |
+| `author` | requis | chaîne non vide, `L'Autre Intelligence & Nous` par défaut |
+| `tags` | requis | chaîne contenant un à trois tags non vides, séparés par des virgules |
 
-`metadata` est un objet libre. Il accueille les champs que le protocole refuse au premier
-niveau — `version`, `homepage`, `argument-hint` — sans sortir du spec.
+Le [standard Agent Skills](https://agentskills.io/specification#metadata-field) impose des clés et valeurs de type chaîne dans `metadata`.
+Les propriétés supplémentaires, comme `homepage`, doivent respecter ce type. Les listes et objets imbriqués sont interdits.
 
 ```yaml
 ---
@@ -53,7 +53,7 @@ license: Apache-2.0
 metadata:
   version: "0.1.0"
   author: "L'Autre Intelligence & Nous"
-  tags: ["email", "redaction", "communication"]
+  tags: "email, redaction, communication"
 ---
 ```
 
@@ -85,18 +85,35 @@ autrement : `references/<sujet>.md`.
 
 ```bash
 uv run scripts/validate-skills.py
+uv run --with pyyaml==6.0.3 python -m unittest discover -s scripts -p 'test_*.py'
+uv run scripts/validate-releases.py --base-ref origin/main
 claude plugin validate plugins/<plugin-name>
 claude plugin validate .
 ```
 
-Le premier contrôle le frontmatter de chaque `SKILL.md` du dépôt. Les deux autres
-contrôlent les manifestes. Les trois doivent passer.
+Le premier contrôle les skills publiées et les gabarits. Les tests couvrent les valeurs invalides et les versions.
+Le contrôle des versions compare les deux manifestes, leur nom et la présence d'une note de version.
+Avec `--base-ref`, il exige une version supérieure pour chaque plugin modifié depuis cette révision Git.
+Actualiser `origin/main` avec `git fetch origin` avant cette comparaison.
+Les commandes Claude contrôlent les manifestes natifs. Tous ces contrôles doivent passer.
+
+GitHub Actions exécute les contrôles Python à chaque pull request et sur `main`.
+Sur les pull requests, la révision cible sert de référence au contrôle des hausses de version.
+Ces contrôles ne remplacent pas un essai d'utilisation dans chaque agent.
 
 `scripts/validate-skills.py` porte son propre auto-contrôle :
 
 ```bash
 uv run scripts/validate-skills.py --demo
 ```
+
+## Versions distribuées
+
+Utiliser des versions stables `x.y.z`, sans zéro initial dans chaque composante.
+Après toute modification distribuée d'un plugin, augmenter sa version dans les deux manifestes et compléter son `CHANGELOG.md`.
+Les versions des deux manifestes doivent être identiques. Un changement de métadonnées est aussi une modification distribuée.
+Incrémenter également `metadata.version` de chaque skill modifiée.
+Documenter les anciennes et nouvelles invocations lors d'un renommage de skill.
 
 ## Branches et commits
 

@@ -1,6 +1,6 @@
 {
   "name": "carriere",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Preparer les entretiens de conseil en strategie et construire sa banque de cas.",
   "author": {
     "name": "L'Autre Intelligence & Nous",
@@ -21,6 +21,15 @@
     "longDescription": "Quatre skills pour preparer les entretiens de conseil : passer un entretien de cas complet, concevoir des cas aux chiffres verifies, auditer la banque de cas, et travailler l'entretien de personnalite.",
     "developerName": "L'Autre Intelligence & Nous",
     "category": "productivity",
-    "websiteURL": "https://github.com/lautreintelligence/competences"
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Prépare une session de cas à partir de ma banque.",
+      "Aide-moi à préparer mon entretien personnel."
+    ]
   }
 }

@@ -11,9 +11,9 @@ description: >
   regarnir. NE PAS l'utiliser pour faire passer un entretien — c'est le rôle du skill case-partner.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["case-interview", "conseil-strategie", "generation"]
+  tags: "case-interview, conseil-strategie, generation"
 ---
 
 # Case Generator — Concepteur de cas MBB

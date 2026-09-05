@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "technologie",
   "displayName": "Technologie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Auditer la lisibilite du code et extraire la specification d'une interface.",
   "author": {
     "name": "L'Autre Intelligence & Nous",

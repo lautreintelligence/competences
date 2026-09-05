@@ -8,9 +8,9 @@ description: >
   session », « distille la conversation ».
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["synthese", "notes", "conversation"]
+  tags: "synthese, notes, conversation"
 ---
 
 # Synthèse de conversation
