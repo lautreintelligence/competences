@@ -1,0 +1,18 @@
+{
+  "name": "data-gouv-fr",
+  "version": "0.1.0",
+  "description": "Rechercher et explorer les données publiques de data.gouv.fr.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "open-data",
+    "data-gouv-fr",
+    "mcp"
+  ],
+  "mcpServers": "./.mcp.json"
+}

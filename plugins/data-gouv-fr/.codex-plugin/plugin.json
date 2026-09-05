@@ -1,0 +1,33 @@
+{
+  "name": "data-gouv-fr",
+  "version": "0.1.0",
+  "description": "Rechercher et explorer les données publiques de data.gouv.fr.",
+  "author": {
+    "name": "L'Autre Intelligence & Nous",
+    "url": "https://github.com/lautreintelligence"
+  },
+  "homepage": "https://github.com/lautreintelligence/competences",
+  "repository": "https://github.com/lautreintelligence/competences",
+  "license": "Apache-2.0",
+  "keywords": [
+    "open-data",
+    "data-gouv-fr",
+    "mcp"
+  ],
+  "interface": {
+    "displayName": "data.gouv.fr",
+    "shortDescription": "Rechercher et explorer les données publiques de data.gouv.fr.",
+    "longDescription": "Connexion au serveur MCP officiel de data.gouv.fr pour consulter les jeux de données et leurs ressources. Plugin publié par L’Autre Intelligence & Nous.",
+    "developerName": "L'Autre Intelligence & Nous",
+    "category": "productivity",
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "defaultPrompt": [
+      "Recherche des jeux de données sur la population des communes françaises."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}
