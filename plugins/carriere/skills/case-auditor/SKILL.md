@@ -11,9 +11,9 @@ description: >
   NE PAS l'utiliser pour faire passer un entretien (case-partner) ni pour créer des cas (case-generator).
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["case-interview", "conseil-strategie", "controle-qualite"]
+  tags: "case-interview, conseil-strategie, controle-qualite"
 ---
 
 # Case Auditor — Contrôleur qualité de la banque

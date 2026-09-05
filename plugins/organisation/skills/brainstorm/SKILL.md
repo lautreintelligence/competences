@@ -11,9 +11,9 @@ description: >
   brainstormer, d'idéer, ou d'explorer des idées systématiquement.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["ideation", "facilitation", "creativite"]
+  tags: "ideation, facilitation, creativite"
 ---
 
 # Brainstorm — Multi-Role Session Orchestrator

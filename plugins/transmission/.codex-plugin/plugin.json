@@ -1,6 +1,6 @@
 {
   "name": "transmission",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Expliquer, transmettre une competence, verifier un raisonnement.",
   "author": {
     "name": "L'Autre Intelligence & Nous",
@@ -21,6 +21,15 @@
     "longDescription": "Trois skills pour faire comprendre : remonter d'un exemple concret vers les principes fondamentaux, transmettre ensemble la methode et les mecanismes, et se contredire soi-meme avant de conclure.",
     "developerName": "L'Autre Intelligence & Nous",
     "category": "productivity",
-    "websiteURL": "https://github.com/lautreintelligence/competences"
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Explique ce concept avec un exemple concret.",
+      "Vérifie les conclusions de ce raisonnement."
+    ]
   }
 }

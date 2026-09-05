@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "carriere",
   "displayName": "Carriere",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Preparer les entretiens de conseil en strategie et construire sa banque de cas.",
   "author": {
     "name": "L'Autre Intelligence & Nous",

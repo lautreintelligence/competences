@@ -1,6 +1,6 @@
 {
   "name": "strategie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Evaluer une idee de business et rendre une recommandation argumentee.",
   "author": {
     "name": "L'Autre Intelligence & Nous",
@@ -21,6 +21,14 @@
     "longDescription": "Evalue une idee de business, produit, service ou investissement en case candidate-led, et rend une recommandation GO ou NO-GO en pyramide de Minto.",
     "developerName": "L'Autre Intelligence & Nous",
     "category": "productivity",
-    "websiteURL": "https://github.com/lautreintelligence/competences"
+    "websiteURL": "https://github.com/lautreintelligence/competences",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Évalue cette idée de business et ses hypothèses."
+    ]
   }
 }

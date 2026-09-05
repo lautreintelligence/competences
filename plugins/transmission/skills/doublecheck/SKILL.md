@@ -17,9 +17,9 @@ description: >
   ou qu'un raisonnement mériterait un second regard.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "L'Autre Intelligence & Nous"
-  tags: ["biais-cognitif", "verification", "raisonnement"]
+  tags: "biais-cognitif, verification, raisonnement"
 ---
 
 # DoubleCheck — Protocole d'auto-correction dialectique

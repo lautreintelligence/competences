@@ -83,7 +83,9 @@ Contraintes mesurées : `name` en kebab-case strict, 64 caractères, identique a
 
 **Le piège.** Claude Code tolère des clés hors spec ; la Skills API et claude.ai les rejettent. Un relevé de 373 `SKILL.md` installées en montre six en circulation : `user-invocable` (151), `argument-hint` (140), `version` (139), `homepage` (12), `tools` (2), `disable-model-invocation` (1). Une skill qui les porte fonctionne en local et échoue à la publication.
 
-**À écrire.** `metadata` est un objet libre. Y loger `version`, `author`, `tags` conserve la portabilité.
+**À écrire.** `metadata` accepte des clés supplémentaires, mais chaque clé et chaque valeur doit être une chaîne.
+Le [standard Agent Skills](https://agentskills.io/specification#metadata-field) exclut les listes et objets imbriqués.
+Dans ce dépôt, écrire par exemple `tags: "redaction, edition, style"`.
 
 ## 6. Un seul `SKILL.md` par skill
 
