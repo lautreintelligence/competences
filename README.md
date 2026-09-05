@@ -24,9 +24,9 @@ codex plugin add communication@competences
 ```
 
 Un plugin installé est une copie réelle sur votre machine. Les compétences se chargent hors
-ligne ; seules l'installation et la mise à jour demandent le réseau.
+ligne ; l’installation, la mise à jour et les appels aux serveurs MCP distants demandent le réseau.
 
-## Les six plugins
+## Les sept plugins
 
 | Plugin | Installation | Ce qu'il vous donne |
 |---|---|---|
@@ -36,18 +36,19 @@ ligne ; seules l'installation et la mise à jour demandent le réseau.
 | [`strategie`](plugins/strategie/README.md) | `/plugin install strategie@competences` | Évaluer une idée de business et trancher — 1 compétence |
 | [`carriere`](plugins/carriere/README.md) | `/plugin install carriere@competences` | Préparer les entretiens de conseil en stratégie — 4 compétences |
 | [`technologie`](plugins/technologie/README.md) | `/plugin install technologie@competences` | Auditer du code, extraire une spécification d'interface — 2 compétences |
+| [`data-gouv-fr`](plugins/data-gouv-fr/README.md) | `/plugin install data-gouv-fr@competences` | Rechercher et explorer les données publiques — connexion MCP |
 
 Le README de chaque plugin décrit ses compétences, comment les appeler et ce qu'elles produisent.
 
 ## Comment c'est organisé
 
-Les plugins suivent les **enjeux de compétences du ROME**, le répertoire des métiers de France
+Les six plugins de compétences suivent les **enjeux de compétences du ROME**, le répertoire des métiers de France
 Travail. Un professionnel y retrouve le vocabulaire de son propre parcours plutôt qu'un
 découpage technique.
 
 ```
 competences/
-├── plugins/          six plugins, dix-sept compétences
+├── plugins/          sept plugins, dix-sept compétences
 ├── templates/        gabarits pour en écrire de nouvelles
 ├── scripts/          contrôle de conformité
 └── docs/             conventions et spécifications

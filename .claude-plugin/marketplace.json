@@ -78,6 +78,17 @@
         "audit",
         "interface"
       ]
+    },
+    {
+      "name": "data-gouv-fr",
+      "source": "./plugins/data-gouv-fr",
+      "displayName": "data.gouv.fr",
+      "description": "Rechercher et explorer les données publiques de data.gouv.fr.",
+      "category": "productivity",
+      "tags": [
+        "open-data",
+        "mcp"
+      ]
     }
   ]
 }
