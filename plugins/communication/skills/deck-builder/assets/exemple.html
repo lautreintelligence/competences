@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deck</title>
+<!--
+  GABARIT deck-builder. Voir references/gabarit.md.
+  Le CSS et le script imposent la grille, les zones fixes et les mises en page. Ne les modifie pas.
+  Si une règle gêne, modifie le contenu.
+  Écris la configuration ci-dessous. Écris une <section class="slide"> par slide dans <main>.
+
+  <section class="slide" data-layout="…" data-section="…" data-source="…" [data-frame="…"]>
+    <h1>Titre d'action : une phrase complète et spécifique, deux lignes au plus</h1>
+    …corps : figure, ul.insights, div.panel, div[data-block], table, div.flow, div.boxes, ol.timeline…
+  </section>
+
+  Le script génère l'en-tête (indicateur de section, boutons de cadre), place le h1, encadre le corps et ajoute le pied (source, numéro).
+  Mises en page : cover, exec-summary, divider, statement, chart-insights, image, panels-2, panels-3, panels-4, table, combo-table, framework, timeline.
+  Visuel : <figure> avec un <svg viewBox="…"> écrit pour le cas, une <img>, ou un <table>. Couleurs par les classes f-* et s-*.
+  Navigation : flèches, espace, Début, Fin, #n. Contrôle de débordement : touche L, ou ?lint dans l'adresse. Impression PDF : Ctrl/Cmd+P, une slide par page.
+-->
+<script type="application/json" id="deck-config">
+{
+  "lang": "fr",
+  "footer": "Nordis · Comité d'investissement · 13 octobre 2026",
+  "sourceLabel": "Source",
+  "frames": { "A": "Diagnostic", "B": "Dispositif", "C": "Trajectoire" }
+}
+</script>
+<style>
+:root{
+  --w:1280px;--h:720px;--m:48px;
+  --ink:#1a1a1a;--muted:#6b6b6b;--line:#d9d9d9;--shade:#eef3fa;
+  --s1:#1f5fbf;--s2:#8c8c8c;--s3:#0f3d7a;--s4:#c4c4c4;
+  --pos:#2e9e5b;--neg:#d64545;--neutral:#8c8c8c;--forecast:#9dbdf0;--accent:#1f5fbf;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#2b2b2b;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink)}
+.stage{position:fixed;inset:0;display:grid;place-items:center}
+.deck{width:var(--w);height:var(--h);position:relative;transform-origin:center}
+section.slide{
+  position:absolute;inset:0;visibility:hidden;width:var(--w);height:var(--h);
+  padding:0 var(--m);background:#fff;display:grid;grid-template-rows:128px minmax(0,1fr) 40px;
+}
+section.slide.on{visibility:visible}
+section.slide[data-layout="cover"],section.slide[data-layout="divider"]{grid-template-rows:minmax(0,1fr) 40px}
+
+/* En-tête : zone fixe. Tracker et boutons de cadre sur une ligne, titre d'action sur deux lignes au plus. */
+header{display:grid;grid-template-rows:24px 72px;row-gap:8px;padding-top:24px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.tracker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.frames{display:flex;gap:6px}
+.frame{font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
+.frame.on{background:var(--accent);border-color:var(--accent);color:#fff}
+h1{margin:0;font-size:28px;line-height:36px;font-weight:600;max-height:72px;overflow:hidden}
+
+/* Corps : grille par mise en page, débordement interdit. */
+.body{padding:24px 0 16px;min-height:0;overflow:hidden;display:grid;gap:24px;grid-auto-rows:minmax(0,1fr);align-items:stretch}
+[data-layout="chart-insights"] .body{grid-template-columns:7fr 5fr}
+[data-layout="panels-2"] .body{grid-template-columns:repeat(2,1fr)}
+[data-layout="panels-3"] .body{grid-template-columns:repeat(3,1fr)}
+[data-layout="panels-4"] .body{grid-template-columns:repeat(4,1fr)}
+[data-layout="exec-summary"] .body{grid-template-columns:repeat(3,1fr)}
+[data-layout="table"] .body,[data-layout="combo-table"] .body,[data-layout="framework"] .body{grid-template-columns:1fr}
+[data-layout="cover"] .body,[data-layout="divider"] .body{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0}
+/* Slide-affirmation : en-tête réduit à la ligne d'indicateur, message en grand dans le corps. */
+section.slide[data-layout="statement"]{grid-template-rows:48px minmax(0,1fr) 40px}
+[data-layout="statement"] header{grid-template-rows:24px}
+[data-layout="statement"] .body{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0 64px}
+[data-layout="statement"] h1{font-size:40px;line-height:48px;max-height:none;text-align:center}
+[data-layout="statement"] .subtitle,[data-layout="statement"] .cite{text-align:center}
+.cite{font-size:14px;color:var(--muted);margin:0}
+/* Slide-image : un visuel sur toute la largeur du corps. */
+[data-layout="image"] .body{grid-template-columns:1fr}
+/* Chronologie : étapes sur une ligne horizontale, de trois à sept. */
+[data-layout="timeline"] .body{grid-template-columns:1fr}
+ol.timeline{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:16px;list-style:none;margin:0;padding:0;position:relative;align-content:start}
+ol.timeline::before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:var(--line)}
+ol.timeline li{position:relative;padding:32px 8px 0 0;font-size:14px;line-height:1.45}
+ol.timeline li::before{content:"";position:absolute;left:0;top:4px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--neutral)}
+ol.timeline li.on::before{background:var(--accent);border-color:var(--accent)}
+ol.timeline time{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+ol.timeline b{display:block;font-size:15px;margin-bottom:4px}
+[data-layout="cover"] h1{font-size:44px;line-height:52px;max-height:none}
+[data-layout="divider"] h1{font-size:40px;line-height:48px;max-height:none}
+.subtitle{font-size:20px;color:var(--muted);margin:0}
+.kicker{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+.meta{font-size:14px;color:var(--muted);margin:0}
+
+/* Pied : source à gauche, pied de deck au centre, numéro à droite. */
+footer{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+footer .num{font-variant-numeric:tabular-nums}
+
+/* Emplacement de visuel : un svg, une image ou un tableau, et une légende facultative. */
+figure{margin:0;min-width:0;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px}
+figure>svg,figure>img{display:block;width:100%;height:100%;object-fit:contain}
+figure>table{align-self:start}
+figcaption{font-size:12px;color:var(--muted)}
+svg{font-family:inherit}
+svg text{font-size:12px;fill:var(--ink)}
+/* Palette pour les svg écrits à la main : fill f-*, stroke s-*. Aucune couleur en dur. */
+.f-ink{fill:var(--ink)}.f-muted{fill:var(--muted)}.f-line{fill:var(--line)}.f-shade{fill:var(--shade)}.f-white{fill:#fff}.f-none{fill:none}
+.f-s1{fill:var(--s1)}.f-s2{fill:var(--s2)}.f-s3{fill:var(--s3)}.f-s4{fill:var(--s4)}
+.f-pos{fill:var(--pos)}.f-neg{fill:var(--neg)}.f-neutral{fill:var(--neutral)}.f-forecast{fill:var(--forecast)}.f-accent{fill:var(--accent)}
+.s-ink{stroke:var(--ink)}.s-muted{stroke:var(--muted)}.s-line{stroke:var(--line)}.s-none{stroke:none}
+.s-s1{stroke:var(--s1)}.s-s2{stroke:var(--s2)}.s-s3{stroke:var(--s3)}.s-s4{stroke:var(--s4)}
+.s-pos{stroke:var(--pos)}.s-neg{stroke:var(--neg)}.s-neutral{stroke:var(--neutral)}.s-forecast{stroke:var(--forecast)}.s-accent{stroke:var(--accent)}
+
+/* Enseignements à côté d'un visuel : même code couleur que les séries. */
+.insights{list-style:none;margin:0;padding:0;display:grid;align-content:start;gap:16px}
+.insights li{border-left:4px solid var(--neutral);padding-left:12px;font-size:15px;line-height:1.4}
+.insights li b{display:block;font-size:16px;margin-bottom:2px}
+[data-tone="pos"]{border-color:var(--pos)!important;--c:var(--pos)}
+[data-tone="neg"]{border-color:var(--neg)!important;--c:var(--neg)}
+[data-tone="s1"]{border-color:var(--s1)!important;--c:var(--s1)}
+[data-tone="s2"]{border-color:var(--s2)!important;--c:var(--s2)}
+[data-tone="s3"]{border-color:var(--s3)!important;--c:var(--s3)}
+[data-tone="s4"]{border-color:var(--s4)!important;--c:var(--s4)}
+[data-tone="forecast"]{border-color:var(--forecast)!important;--c:var(--forecast)}
+[data-tone="accent"]{border-color:var(--accent)!important;--c:var(--accent)}
+
+/* Panneaux */
+.panel{display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;border-top:3px solid var(--accent);padding-top:12px;min-width:0}
+.panel h2{margin:0;font-size:16px;line-height:1.3}
+.panel ul,.panel ol{margin:0;padding-left:18px;font-size:14px;line-height:1.45}
+.panel p{margin:0;font-size:14px;line-height:1.45}
+.kpi{font-size:44px;font-weight:600;line-height:1;align-self:start}
+.kpi small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:8px;line-height:1.4}
+
+/* Résumé exécutif : Situation, Complication, Résolution. */
+[data-block]{border-top:3px solid var(--neutral);padding-top:12px;font-size:15px;line-height:1.45}
+[data-block] h2{margin:0 0 8px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+[data-block] p,[data-block] ul{margin:0 0 8px}
+[data-block] ul{padding-left:18px}
+[data-block="complication"]{border-color:var(--neg)}
+[data-block="resolution"]{border-color:var(--accent);background:var(--shade);padding:12px}
+[data-block="resolution"] h2{color:var(--accent)}
+
+/* Tableaux */
+table{border-collapse:collapse;width:100%;font-size:14px;align-self:start}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding:8px 10px;vertical-align:bottom}
+thead tr:first-child th[colspan]{text-align:center;border-bottom:1px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:600;border-top:2px solid var(--ink);border-bottom:0}
+tr.on td{background:var(--shade)}
+td[data-bar]{background:linear-gradient(90deg,var(--forecast) calc(var(--bar)*100%),transparent 0) no-repeat 0 50%/100% 60%;font-variant-numeric:tabular-nums}
+td[data-level] .level{letter-spacing:2px;color:var(--accent);white-space:nowrap}
+.legend{display:flex;gap:18px;list-style:none;margin:0;padding:0;font-size:12px;color:var(--muted);align-self:end}
+.legend li{border:0!important}
+.legend li::before{content:"";display:inline-block;width:10px;height:10px;margin-right:6px;background:var(--c,var(--neutral));vertical-align:-1px}
+
+/* Diapositive conceptuelle : flux horizontal ou grille de boîtes. */
+.flow{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:40px;align-items:stretch}
+.flow .box{position:relative}
+.flow .box:not(:last-child)::after{content:"";position:absolute;right:-28px;top:50%;margin-top:-10px;border:10px solid transparent;border-left:14px solid var(--s4)}
+.boxes{display:grid;gap:16px;align-content:start}
+.boxes.cols-2{grid-template-columns:repeat(2,1fr)}
+.boxes.cols-3{grid-template-columns:repeat(3,1fr)}
+.boxes.cols-4{grid-template-columns:repeat(4,1fr)}
+.box{border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:14px;line-height:1.45}
+.box h3{margin:0 0 6px;font-size:15px}
+.box ul{margin:0;padding-left:18px}
+.box.on{border-color:var(--accent);background:var(--shade)}
+.box .tag{display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--accent);padding:2px 6px;border-radius:3px;margin-bottom:6px}
+.note{font-size:12px;color:var(--muted)}
+
+/* Contrôle */
+.lint-bad{outline:3px solid var(--neg);outline-offset:-3px}
+#lint{position:fixed;left:12px;bottom:12px;max-width:520px;background:#fff;border:2px solid var(--neg);padding:10px 12px;font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:0;z-index:9}
+
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{background:#fff}
+  .stage{position:static;display:block}
+  .deck{transform:none!important;width:var(--w);height:auto}
+  section.slide{position:relative;visibility:visible;break-after:page;page-break-after:always}
+  #lint{display:none}
+}
+</style>
+</head>
+<body>
+<div class="stage"><main class="deck">
+
+<section class="slide" data-layout="cover">
+  <p class="kicker">Nordis · Customer Success</p>
+  <h1>Enrayer l'attrition : investir 2 M€ dans une équipe Customer Success</h1>
+  <p class="subtitle">Décision demandée au comité d'investissement</p>
+  <p class="meta">13 octobre 2026 · Direction Clients</p>
+</section>
+<section class="slide" data-layout="exec-summary" data-section="Résumé exécutif">
+  <h1>Investir 2 M€ sur deux ans dans six Customer Success Managers retient 1,5 M€ d'ARR par an et se rembourse en 20 mois</h1>
+  <div data-block="situation"><h2>Situation</h2><p>Nordis réalise 18,8 M€ d'ARR auprès de 320 clients, en croissance de 12 % par an.</p><p>Les clients de moins de 50 K€ d'ARR représentent 61 % du portefeuille et n'ont aucun interlocuteur dédié.</p></div>
+  <div data-block="complication"><h2>Complication</h2><p>L'attrition est passée de 8 % à 14 % en dix-huit mois.</p><p>Elle efface 1,1 M€ d'ARR par an et reprend près de la moitié des ventes nouvelles.</p><p>Sans action, l'ARR 2028 plafonne à 17,1 M€.</p></div>
+  <div data-block="resolution"><h2>Résolution</h2><p>Recruter six Customer Success Managers pour 2 M€ sur deux ans, affectés aux comptes de moins de 50 K€.</p><ul><li>Attrition ramenée à 9 % fin 2028</li><li>1,5 M€ d'ARR retenus par an</li><li>Retour sur investissement en 20 mois</li></ul></div>
+</section>
+<section class="slide" data-layout="divider">
+  <p class="kicker">01</p>
+  <h1>Diagnostic : d'où vient l'attrition</h1>
+  <p class="subtitle">Trajectoire de l'ARR, segments touchés, causes</p>
+</section>
+<section class="slide" data-layout="chart-insights" data-section="01 Diagnostic › ARR" data-frame="A" data-source="Comptabilité analytique Nordis, ARR au 30 juin de chaque année">
+  <h1>Entre 2024 et 2026, l'attrition a repris 2,2 M€ sur les 4,7 M€ gagnés en ventes nouvelles et en expansion</h1>
+  <figure><svg viewBox="0 0 676 512" role="img" aria-label="Cascade de l'ARR 2024 à 2026">
+    <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="f-ink"/></marker></defs>
+    <text x="0" y="13" class="f-muted">M€</text>
+    <line x1="88" x2="588" y1="40" y2="40" class="s-ink" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="338" y="31" text-anchor="middle" font-weight="600">+2,5 M€ (+15 %)</text>
+    <rect x="60" y="150" width="56" height="320" class="f-neutral"/><text x="88" y="142" text-anchor="middle">16,3</text><text x="88" y="494" text-anchor="middle" class="f-muted">ARR 2024</text>
+    <rect x="185" y="73" width="56" height="77" class="f-pos"/><text x="213" y="65" text-anchor="middle">+3,9</text><text x="213" y="494" text-anchor="middle" class="f-muted">Ventes nouvelles</text>
+    <rect x="310" y="57" width="56" height="16" class="f-pos"/><text x="338" y="49" text-anchor="middle">+0,8</text><text x="338" y="494" text-anchor="middle" class="f-muted">Expansion</text>
+    <rect x="435" y="57" width="56" height="43" class="f-neg"/><text x="463" y="49" text-anchor="middle">−2,2</text><text x="463" y="494" text-anchor="middle" class="f-muted">Attrition</text>
+    <rect x="560" y="100" width="56" height="370" class="f-neutral"/><text x="588" y="92" text-anchor="middle">18,8</text><text x="588" y="494" text-anchor="middle" class="f-muted">ARR 2026</text>
+    <line x1="8" x2="668" y1="470" y2="470" class="s-ink"/>
+  </svg></figure>
+  <ul class="insights">
+    <li data-tone="pos"><b>4,7 M€ gagnés</b>Les ventes nouvelles tiennent le plan à 3,9 M€ et l'expansion ajoute 0,8 M€.</li>
+    <li data-tone="neg"><b>2,2 M€ perdus</b>L'attrition a doublé en volume : 0,7 M€ en 2024, 1,5 M€ en 2026.</li>
+    <li data-tone="neutral"><b>Croissance nette divisée par deux</b>De 12 % par an à 7 % en 2026, à effort commercial constant.</li>
+  </ul>
+</section>
+<section class="slide" data-layout="panels-3" data-section="01 Diagnostic › Segments" data-frame="A" data-source="CRM Nordis, clients perdus entre juillet 2025 et juin 2026 (n = 44)">
+  <h1>Le churn se concentre sur les clients de moins de 50 K€ d'ARR, qui n'ont eu aucun contact depuis six mois dans 68 % des cas</h1>
+  <div class="panel"><h2>Churn annuel par segment d'ARR</h2><figure><svg viewBox="0 0 379 470" role="img" aria-label="Churn par segment">
+    <text x="130" y="84" text-anchor="end">Moins de 50 K€</text><rect x="140" y="64" width="210" height="28" class="f-s1"/><text x="300" y="83" class="f-white">21 %</text>
+    <text x="130" y="184" text-anchor="end">50 à 200 K€</text><rect x="140" y="164" width="90" height="28" class="f-s4"/><text x="238" y="183">9 %</text>
+    <text x="130" y="284" text-anchor="end">Plus de 200 K€</text><rect x="140" y="264" width="40" height="28" class="f-s4"/><text x="188" y="283">4 %</text>
+    <line x1="140" x2="140" y1="40" y2="320" class="s-ink"/>
+  </svg></figure></div>
+  <div class="panel"><h2>Contact avant le départ</h2><p class="kpi">68 %<small>des clients perdus n'avaient eu aucun échange avec Nordis dans les six mois précédant la résiliation</small></p></div>
+  <div class="panel"><h2>Motifs déclarés à la résiliation</h2><ul><li>Adoption faible : 23 clients</li><li>Prix : 11</li><li>Concurrent : 7</li><li>Autre : 3</li></ul></div>
+</section>
+<section class="slide" data-layout="chart-insights" data-section="01 Diagnostic › Contacts" data-frame="A" data-source="CRM Nordis, 320 clients actifs, contacts qualifiés sur 12 mois">
+  <h1>Le churn décroît avec la fréquence de contact : au-delà de quatre échanges par an, il tombe sous 6 %</h1>
+  <figure><svg viewBox="0 0 676 512" role="img" aria-label="Churn selon la fréquence de contact">
+    <text x="48" y="16" class="f-muted">Churn (%)</text><text x="668" y="506" text-anchor="end" class="f-muted">Contacts qualifiés par an</text>
+    <line x1="48" x2="668" y1="470" y2="470" class="s-ink"/><line x1="48" x2="48" y1="24" y2="470" class="s-ink"/>
+    <circle cx="48" cy="50" r="5" class="f-s2"/><circle cx="100" cy="137" r="5" class="f-s2"/><circle cx="151" cy="225" r="5" class="f-s2"/><circle cx="203" cy="295" r="5" class="f-s2"/>
+    <circle cx="255" cy="365" r="7" class="f-s1"/><text x="266" y="358">4 contacts : 6 %</text>
+    <circle cx="358" cy="382" r="5" class="f-s2"/><circle cx="461" cy="400" r="5" class="f-s2"/><circle cx="668" cy="400" r="5" class="f-s2"/>
+    <text x="40" y="474" text-anchor="end" class="f-muted">0</text><text x="40" y="34" text-anchor="end" class="f-muted">24</text><text x="48" y="490" class="f-muted">0</text><text x="668" y="490" text-anchor="end" class="f-muted">12</text>
+  </svg></figure>
+  <ul class="insights">
+    <li data-tone="s1"><b>Le seuil est à quatre contacts par an</b>Un échange par trimestre ramène le churn au niveau des grands comptes.</li>
+    <li data-tone="s2"><b>Au-delà, le gain plafonne</b>Passer de 4 à 12 contacts ne fait gagner que 2 points.</li>
+  </ul>
+</section>
+<section class="slide" data-layout="divider">
+  <p class="kicker">02</p>
+  <h1>Recommandation : six Customer Success Managers</h1>
+  <p class="subtitle">Options écartées, trajectoire financière, décision</p>
+</section>
+<section class="slide" data-layout="table" data-section="02 Recommandation › Options" data-frame="B" data-source="Direction financière, septembre 2026">
+  <h1>Des trois options chiffrées, seule l'équipe dédiée agit sur les deux causes du churn et se rembourse en moins de deux ans</h1>
+  <table>
+    <thead><tr><th rowspan="2">Option</th><th colspan="2">Coût sur deux ans</th><th colspan="2">Effet attendu</th><th rowspan="2">Retour</th></tr>
+    <tr><th class="num">Total</th><th class="num">Par an</th><th class="num">Churn cible</th><th class="num">ARR retenu par an</th></tr></thead>
+    <tbody>
+      <tr class="on"><td><b>Équipe de six CSM</b> (recommandée)</td><td class="num">2,0 M€</td><td class="num">1,0 M€</td><td class="num">9 %</td><td class="num">1,5 M€</td><td>20 mois</td></tr>
+      <tr><td>Automatisation seule</td><td class="num">0,6 M€</td><td class="num">0,3 M€</td><td class="num">12 %</td><td class="num">0,6 M€</td><td>24 mois</td></tr>
+      <tr><td>Remise tarifaire de 10 %</td><td class="num">2,3 M€</td><td class="num">1,15 M€</td><td class="num">11 %</td><td class="num">0,9 M€</td><td>Jamais</td></tr>
+    </tbody>
+  </table>
+</section>
+<section class="slide" data-layout="chart-insights" data-section="02 Recommandation › Trajectoire" data-frame="C" data-source="Modèle financier Nordis, scénarios au 30 septembre 2026">
+  <h1>Sans action, l'attrition ramène l'ARR à 17,1 M€ en 2028…</h1>
+  <figure><svg viewBox="0 0 676 512" role="img" aria-label="Trajectoires d'ARR 2024-2028">
+    <rect x="380" y="28" width="288" height="442" class="f-shade"/><text x="660" y="44" text-anchor="end" class="f-muted">Prévision</text>
+    <text x="0" y="13" class="f-muted">M€ d'ARR</text>
+    <polyline points="70,330 190,290 310,250" fill="none" class="s-s1" stroke-width="2.5"/><polyline points="310,250 430,200 550,130" fill="none" class="s-s1" stroke-width="2.5" stroke-dasharray="7 4"/>
+    <polyline points="310,250 430,273 550,306" fill="none" class="s-s2" stroke-width="2.5" stroke-dasharray="12 5"/>
+    <circle cx="70" cy="330" r="4" class="f-s1"/><circle cx="190" cy="290" r="4" class="f-s1"/><circle cx="310" cy="250" r="4" class="f-s1"/><circle cx="430" cy="200" r="4" class="f-s1"/><circle cx="550" cy="130" r="4" class="f-s1"/><circle cx="430" cy="273" r="4" class="f-s2"/><circle cx="550" cy="306" r="4" class="f-s2"/>
+    <text x="560" y="134" class="f-s1">Avec six CSM 22,4</text><text x="560" y="310" class="f-s2">Sans action 17,1</text><text x="60" y="334" text-anchor="end" class="f-muted">16,3</text>
+    <line x1="8" x2="668" y1="470" y2="470" class="s-ink"/>
+    <text x="70" y="494" text-anchor="middle" class="f-muted">2024</text><text x="190" y="494" text-anchor="middle" class="f-muted">2025</text><text x="310" y="494" text-anchor="middle" class="f-muted">2026</text><text x="430" y="494" text-anchor="middle" class="f-muted">2027F</text><text x="550" y="494" text-anchor="middle" class="f-muted">2028F</text>
+  </svg></figure>
+  <ul class="insights">
+    <li data-tone="s2"><b>Sans action : 17,1 M€</b>Le churn à 14 % dépasse les ventes nouvelles dès 2027.</li>
+    <li data-tone="s1"><b>Avec six CSM : 22,4 M€</b>Le churn revient à 9 % et l'expansion repart.</li>
+  </ul>
+</section>
+<section class="slide" data-layout="chart-insights" data-section="02 Recommandation › Trajectoire" data-frame="C" data-source="Modèle financier Nordis, scénarios au 30 septembre 2026">
+  <h1>…tandis que six CSM portent l'ARR 2028 à 22,4 M€, dont 1,8 M€ restent à gagner par les ventes</h1>
+  <figure><svg viewBox="0 0 676 512" role="img" aria-label="Écart entre scénario sans action et cible 2028">
+    <text x="0" y="13" class="f-muted">M€</text>
+    <rect x="60" y="178" width="56" height="292" class="f-neutral"/><text x="88" y="170" text-anchor="middle">17,1</text><text x="88" y="494" text-anchor="middle" class="f-muted">Sans action</text>
+    <rect x="185" y="142" width="56" height="36" class="f-pos"/><text x="213" y="134" text-anchor="middle">+2,1</text><text x="213" y="494" text-anchor="middle" class="f-muted">Rétention</text>
+    <rect x="310" y="118" width="56" height="24" class="f-pos"/><text x="338" y="110" text-anchor="middle">+1,4</text><text x="338" y="494" text-anchor="middle" class="f-muted">Expansion</text>
+    <rect x="435" y="87" width="56" height="31" class="f-white s-neg" stroke-dasharray="5 4" stroke-width="1.5"/><text x="463" y="79" text-anchor="middle">+1,8</text><text x="463" y="494" text-anchor="middle" class="f-muted">Écart à combler</text>
+    <rect x="560" y="87" width="56" height="383" class="f-accent"/><text x="588" y="79" text-anchor="middle">22,4</text><text x="588" y="494" text-anchor="middle" class="f-muted">Cible 2028</text>
+    <line x1="8" x2="668" y1="470" y2="470" class="s-ink"/>
+  </svg></figure>
+  <ul class="insights">
+    <li data-tone="pos"><b>3,5 M€ par le dispositif</b>Rétention et expansion sont chiffrées sur les segments déjà analysés.</li>
+    <li data-tone="neg"><b>1,8 M€ à gagner</b>Le plan commercial 2028 doit absorber cet écart ; il n'est pas financé par la décision.</li>
+  </ul>
+</section>
+<section class="slide" data-layout="panels-3" data-section="02 Recommandation › Décision" data-frame="C" data-source="Direction Clients Nordis">
+  <h1>Décision demandée : valider 2 M€ sur 2027-2028 et un démarrage des recrutements au 1er janvier 2027</h1>
+  <div class="panel"><h2>Ce que le comité valide</h2><ul><li>Budget de 2 M€ sur deux ans</li><li>Six recrutements au premier semestre 2027</li><li>Objectif de churn à 9 % fin 2028</li></ul></div>
+  <div class="panel"><h2>Jalons de contrôle</h2><ul><li>Mars 2027 : équipe en place, 196 comptes couverts</li><li>Septembre 2027 : churn trimestriel sous 3 %</li><li>Juin 2028 : 1 M€ d'ARR retenu en cumul</li></ul></div>
+  <div class="panel"><h2>Risques et parades</h2><ul><li>Recrutement lent : vivier de 14 candidats déjà qualifié</li><li>Adoption faible du scoring : pilote sur 40 comptes dès novembre 2026</li></ul></div>
+</section>
+
+
+
+<section class="slide" data-layout="statement" data-section="02 Recommandation › Témoignage" data-source="Entretien de résiliation, client Altaver, 2 septembre 2026">
+  <h1>« Personne ne nous a appelés en six mois. Le jour où nous avons résilié, trois personnes ont appelé. »</h1>
+  <p class="cite">Directrice des opérations, Altaver, 620 K€ d'ARR</p>
+</section>
+<section class="slide" data-layout="image" data-section="02 Recommandation › Outil" data-source="Maquette du tableau de bord de risque, Direction Clients, septembre 2026">
+  <h1>Le tableau de bord classe les 196 comptes par score de risque et fait remonter les 6 comptes au-dessus de 60 points</h1>
+  <figure><svg viewBox="0 0 1184 512" role="img" aria-label="Maquette du tableau de bord">
+    <rect x="0" y="0" width="1184" height="512" class="f-shade"/>
+    <rect x="24" y="24" width="1136" height="48" class="f-white"/><text x="40" y="54" font-size="16">Comptes par score de risque</text>
+    <rect x="24" y="88" width="1136" height="56" class="f-white s-accent" stroke-width="3"/><text x="40" y="122" font-size="14">Altaver · 620 K€ · score 82</text>
+    <rect x="24" y="152" width="1136" height="56" class="f-white"/><text x="40" y="186" font-size="14">Brome Industrie · 540 K€ · score 74</text>
+    <rect x="24" y="216" width="1136" height="56" class="f-white"/><text x="40" y="250" font-size="14">Cellis · 410 K€ · score 66</text>
+  </svg><figcaption>Le compte au-dessus du seuil de 60 points est encadré en bleu.</figcaption></figure>
+</section>
+<section class="slide" data-layout="timeline" data-section="02 Recommandation › Plan" data-source="Direction Clients, plan de déploiement au 30 septembre 2026">
+  <h1>Le dispositif couvre les 196 comptes en six mois, avec un pilote sur 40 comptes dès novembre 2026</h1>
+  <ol class="timeline">
+    <li class="on"><time>Novembre 2026</time><b>Pilote</b>40 comptes, deux CSM en interne.</li>
+    <li><time>Janvier 2027</time><b>Recrutements</b>Quatre CSM, vivier qualifié.</li>
+    <li><time>Mars 2027</time><b>Couverture complète</b>196 comptes, revue trimestrielle.</li>
+    <li><time>Septembre 2027</time><b>Premier bilan</b>Churn trimestriel sous 3 %.</li>
+  </ol>
+</section>
+
+
+</main></div>
+<pre id="lint" hidden></pre>
+<script>
+(function () {
+  'use strict';
+  var W = 1280, H = 720, cfg = {};
+  try { cfg = JSON.parse(document.getElementById('deck-config').textContent); } catch (e) { console.error('deck-config invalide', e); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* Le script génère l'en-tête, le corps et le pied. Ils sont identiques et immobiles sur chaque slide. */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('main.deck > section.slide'));
+  slides.forEach(function (s, i) {
+    var layout = s.dataset.layout || '', bare = layout === 'cover' || layout === 'divider', statement = layout === 'statement';
+    var h1 = s.querySelector(':scope > h1');
+    var body = document.createElement('div'); body.className = 'body';
+    Array.prototype.slice.call(s.childNodes).forEach(function (n) { if (bare || statement || n !== h1) body.appendChild(n); });
+    if (!bare) {
+      var header = document.createElement('header'), top = document.createElement('div'); top.className = 'top';
+      var tr = document.createElement('div'); tr.className = 'tracker'; tr.textContent = s.dataset.section || ''; top.appendChild(tr);
+      if (s.dataset.frame && cfg.frames && Object.keys(cfg.frames).length) {
+        var nav = document.createElement('nav'); nav.className = 'frames';
+        Object.keys(cfg.frames).forEach(function (k) {
+          var b = document.createElement('span'); b.className = 'frame' + (k === s.dataset.frame ? ' on' : ''); b.textContent = k + ' ' + cfg.frames[k]; nav.appendChild(b);
+        });
+        top.appendChild(nav);
+      }
+      header.appendChild(top); if (h1 && !statement) header.appendChild(h1); s.appendChild(header);
+    }
+    s.appendChild(body);
+    var footer = document.createElement('footer');
+    var src = s.dataset.source ? (cfg.sourceLabel || 'Source') + ' : ' + s.dataset.source : '';
+    footer.innerHTML = '<span class="source">' + esc(src) + '</span><span class="foot">' + esc(cfg.footer || '') + '</span><span class="num">' + (i + 1) + '</span>';
+    s.appendChild(footer);
+  });
+
+  /* Tableau combiné : data-bar (0 à 1) donne une micro-barre, data-level (0 à 5) donne un niveau en points. */
+  Array.prototype.forEach.call(document.querySelectorAll('td[data-bar]'), function (td) {
+    td.style.setProperty('--bar', Math.max(0, Math.min(1, parseFloat(td.dataset.bar) || 0)));
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('td[data-level]'), function (td) {
+    var n = Math.max(0, Math.min(5, parseInt(td.dataset.level, 10) || 0)), sp = document.createElement('span');
+    sp.className = 'level'; sp.textContent = new Array(n + 1).join('●') + new Array(5 - n + 1).join('○'); td.appendChild(sp);
+  });
+
+  /* Navigation, mise à l'échelle, contrôle de débordement. */
+  var cur = 0, deck = document.querySelector('.deck');
+  function show(i) { cur = Math.max(0, Math.min(slides.length - 1, i)); slides.forEach(function (s, k) { s.classList.toggle('on', k === cur); }); history.replaceState(null, '', '#' + (cur + 1)); }
+  function fit() { deck.style.transform = 'scale(' + Math.min(innerWidth / W, innerHeight / H) + ')'; }
+  function lint() {
+    var out = [];
+    slides.forEach(function (s, i) {
+      Array.prototype.forEach.call(s.querySelectorAll('.lint-bad'), function (e) { e.classList.remove('lint-bad'); });
+      var h1 = s.querySelector('h1'), b = s.querySelector('.body');
+      if (h1 && h1.scrollHeight > h1.clientHeight + 1) { out.push('Slide ' + (i + 1) + ' : le titre dépasse deux lignes'); h1.classList.add('lint-bad'); }
+      if (b && (b.scrollHeight > b.clientHeight + 1 || b.scrollWidth > b.clientWidth + 1)) { out.push('Slide ' + (i + 1) + ' : le corps déborde'); b.classList.add('lint-bad'); }
+      Array.prototype.forEach.call(s.querySelectorAll('figure'), function (f) {
+        if (!f.querySelector('svg, img, table')) { out.push('Slide ' + (i + 1) + ' : emplacement de visuel vide'); f.classList.add('lint-bad'); }
+      });
+    });
+    var p = document.getElementById('lint'); p.hidden = false; p.textContent = out.length ? out.join('\n') : 'OK : aucun débordement.';
+    return out;
+  }
+  window.deckLint = lint;
+  addEventListener('resize', fit);
+  addEventListener('keydown', function (e) {
+    if (['ArrowRight', ' ', 'PageDown', 'ArrowDown'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur + 1); }
+    else if (['ArrowLeft', 'PageUp', 'ArrowUp'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur - 1); }
+    else if (e.key === 'Home') show(0); else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'l' || e.key === 'L') lint();
+  });
+  addEventListener('hashchange', function () { show((parseInt(location.hash.slice(1), 10) || 1) - 1); });
+  fit();
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+  if (/lint/.test(location.search)) requestAnimationFrame(function () { requestAnimationFrame(lint); });
+})();
+</script>
+</body>
+</html>

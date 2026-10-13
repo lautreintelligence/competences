@@ -9,6 +9,10 @@ created: 2026-08-24
 
 # Changelog
 
+## 1.1.0 — 2026-10-13
+
+- Ajoute `deck-builder` : deck de décision, d'information, de pitch ou de formation, avec storyline validé avant toute slide, gabarit HTML à grille fixe et contrôle de structure.
+
 ## 1.0.1 — 2026-09-05
 
 - Convertit les tags des skills en chaînes conformes au standard Agent Skills.

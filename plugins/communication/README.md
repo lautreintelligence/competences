@@ -6,6 +6,7 @@ Rédiger, reformuler et structurer une prise de parole professionnelle. Publié 
 
 | Skill | Invocation | Objet |
 |---|---|---|
+| `deck-builder` | `/communication:deck-builder` | Construit un deck qui porte un message et obtient un effet : storyline validé avant toute slide, deck HTML sur gabarit à grille fixe, contrôle de structure. |
 | `email-diplomatique` | `/communication:email-diplomatique` | Reformule un message brut ou émotionnel en deux variantes email, formelle et informelle. |
 | `plan-de-presentation` | `/communication:plan-de-presentation` | Structure une prise de parole persuasive et choisit le plan rhétorique adapté au contexte et à l'audience. |
 | `unslop` | `/communication:unslop` | Détecte et corrige six catégories de marqueurs d'écriture IA, avec un garde-fou contre la surcorrection. |
