@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deck</title>
+<!--
+  GABARIT deck-builder. Voir references/gabarit.md.
+  Le CSS et le script imposent la grille, les zones fixes et les mises en page. Ne les modifie pas.
+  Si une règle gêne, modifie le contenu.
+  Écris la configuration ci-dessous. Écris une <section class="slide"> par slide dans <main>.
+
+  <section class="slide" data-layout="…" data-section="…" data-source="…" [data-frame="…"]>
+    <h1>Titre d'action : une phrase complète et spécifique, deux lignes au plus</h1>
+    …corps : figure, ul.insights, div.panel, div[data-block], table, div.flow, div.boxes, ol.timeline…
+  </section>
+
+  Le script génère l'en-tête (indicateur de section, boutons de cadre), place le h1, encadre le corps et ajoute le pied (source, numéro).
+  Mises en page : cover, exec-summary, divider, statement, chart-insights, image, panels-2, panels-3, panels-4, table, combo-table, framework, timeline.
+  Visuel : <figure> avec un <svg viewBox="…"> écrit pour le cas, une <img>, ou un <table>. Couleurs par les classes f-* et s-*.
+  Navigation : flèches, espace, Début, Fin, #n. Contrôle de débordement : touche L, ou ?lint dans l'adresse. Impression PDF : Ctrl/Cmd+P, une slide par page.
+-->
+<script type="application/json" id="deck-config">
+{
+  "lang": "fr",
+  "footer": "",
+  "sourceLabel": "Source",
+  "frames": {}
+}
+</script>
+<style>
+:root{
+  --w:1280px;--h:720px;--m:48px;
+  --ink:#1a1a1a;--muted:#6b6b6b;--line:#d9d9d9;--shade:#eef3fa;
+  --s1:#1f5fbf;--s2:#8c8c8c;--s3:#0f3d7a;--s4:#c4c4c4;
+  --pos:#2e9e5b;--neg:#d64545;--neutral:#8c8c8c;--forecast:#9dbdf0;--accent:#1f5fbf;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#2b2b2b;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink)}
+.stage{position:fixed;inset:0;display:grid;place-items:center}
+.deck{width:var(--w);height:var(--h);position:relative;transform-origin:center}
+section.slide{
+  position:absolute;inset:0;visibility:hidden;width:var(--w);height:var(--h);
+  padding:0 var(--m);background:#fff;display:grid;grid-template-rows:128px minmax(0,1fr) 40px;
+}
+section.slide.on{visibility:visible}
+section.slide[data-layout="cover"],section.slide[data-layout="divider"]{grid-template-rows:minmax(0,1fr) 40px}
+
+/* En-tête : zone fixe. Tracker et boutons de cadre sur une ligne, titre d'action sur deux lignes au plus. */
+header{display:grid;grid-template-rows:24px 72px;row-gap:8px;padding-top:24px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.tracker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.frames{display:flex;gap:6px}
+.frame{font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
+.frame.on{background:var(--accent);border-color:var(--accent);color:#fff}
+h1{margin:0;font-size:28px;line-height:36px;font-weight:600;max-height:72px;overflow:hidden}
+
+/* Corps : grille par mise en page, débordement interdit. */
+.body{padding:24px 0 16px;min-height:0;overflow:hidden;display:grid;gap:24px;grid-auto-rows:minmax(0,1fr);align-items:stretch}
+[data-layout="chart-insights"] .body{grid-template-columns:7fr 5fr}
+[data-layout="panels-2"] .body{grid-template-columns:repeat(2,1fr)}
+[data-layout="panels-3"] .body{grid-template-columns:repeat(3,1fr)}
+[data-layout="panels-4"] .body{grid-template-columns:repeat(4,1fr)}
+[data-layout="exec-summary"] .body{grid-template-columns:repeat(3,1fr)}
+[data-layout="table"] .body,[data-layout="combo-table"] .body,[data-layout="framework"] .body{grid-template-columns:1fr}
+[data-layout="cover"] .body,[data-layout="divider"] .body{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0}
+/* Slide-affirmation : en-tête réduit à la ligne d'indicateur, message en grand dans le corps. */
+section.slide[data-layout="statement"]{grid-template-rows:48px minmax(0,1fr) 40px}
+[data-layout="statement"] header{grid-template-rows:24px}
+[data-layout="statement"] .body{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0 64px}
+[data-layout="statement"] h1{font-size:40px;line-height:48px;max-height:none;text-align:center}
+[data-layout="statement"] .subtitle,[data-layout="statement"] .cite{text-align:center}
+.cite{font-size:14px;color:var(--muted);margin:0}
+/* Slide-image : un visuel sur toute la largeur du corps. */
+[data-layout="image"] .body{grid-template-columns:1fr}
+/* Chronologie : étapes sur une ligne horizontale, de trois à sept. */
+[data-layout="timeline"] .body{grid-template-columns:1fr}
+ol.timeline{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:16px;list-style:none;margin:0;padding:0;position:relative;align-content:start}
+ol.timeline::before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:var(--line)}
+ol.timeline li{position:relative;padding:32px 8px 0 0;font-size:14px;line-height:1.45}
+ol.timeline li::before{content:"";position:absolute;left:0;top:4px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--neutral)}
+ol.timeline li.on::before{background:var(--accent);border-color:var(--accent)}
+ol.timeline time{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+ol.timeline b{display:block;font-size:15px;margin-bottom:4px}
+[data-layout="cover"] h1{font-size:44px;line-height:52px;max-height:none}
+[data-layout="divider"] h1{font-size:40px;line-height:48px;max-height:none}
+.subtitle{font-size:20px;color:var(--muted);margin:0}
+.kicker{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+.meta{font-size:14px;color:var(--muted);margin:0}
+
+/* Pied : source à gauche, pied de deck au centre, numéro à droite. */
+footer{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+footer .num{font-variant-numeric:tabular-nums}
+
+/* Emplacement de visuel : un svg, une image ou un tableau, et une légende facultative. */
+figure{margin:0;min-width:0;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px}
+figure>svg,figure>img{display:block;width:100%;height:100%;object-fit:contain}
+figure>table{align-self:start}
+figcaption{font-size:12px;color:var(--muted)}
+svg{font-family:inherit}
+svg text{font-size:12px;fill:var(--ink)}
+/* Palette pour les svg écrits à la main : fill f-*, stroke s-*. Aucune couleur en dur. */
+.f-ink{fill:var(--ink)}.f-muted{fill:var(--muted)}.f-line{fill:var(--line)}.f-shade{fill:var(--shade)}.f-white{fill:#fff}.f-none{fill:none}
+.f-s1{fill:var(--s1)}.f-s2{fill:var(--s2)}.f-s3{fill:var(--s3)}.f-s4{fill:var(--s4)}
+.f-pos{fill:var(--pos)}.f-neg{fill:var(--neg)}.f-neutral{fill:var(--neutral)}.f-forecast{fill:var(--forecast)}.f-accent{fill:var(--accent)}
+.s-ink{stroke:var(--ink)}.s-muted{stroke:var(--muted)}.s-line{stroke:var(--line)}.s-none{stroke:none}
+.s-s1{stroke:var(--s1)}.s-s2{stroke:var(--s2)}.s-s3{stroke:var(--s3)}.s-s4{stroke:var(--s4)}
+.s-pos{stroke:var(--pos)}.s-neg{stroke:var(--neg)}.s-neutral{stroke:var(--neutral)}.s-forecast{stroke:var(--forecast)}.s-accent{stroke:var(--accent)}
+
+/* Enseignements à côté d'un visuel : même code couleur que les séries. */
+.insights{list-style:none;margin:0;padding:0;display:grid;align-content:start;gap:16px}
+.insights li{border-left:4px solid var(--neutral);padding-left:12px;font-size:15px;line-height:1.4}
+.insights li b{display:block;font-size:16px;margin-bottom:2px}
+[data-tone="pos"]{border-color:var(--pos)!important;--c:var(--pos)}
+[data-tone="neg"]{border-color:var(--neg)!important;--c:var(--neg)}
+[data-tone="s1"]{border-color:var(--s1)!important;--c:var(--s1)}
+[data-tone="s2"]{border-color:var(--s2)!important;--c:var(--s2)}
+[data-tone="s3"]{border-color:var(--s3)!important;--c:var(--s3)}
+[data-tone="s4"]{border-color:var(--s4)!important;--c:var(--s4)}
+[data-tone="forecast"]{border-color:var(--forecast)!important;--c:var(--forecast)}
+[data-tone="accent"]{border-color:var(--accent)!important;--c:var(--accent)}
+
+/* Panneaux */
+.panel{display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;border-top:3px solid var(--accent);padding-top:12px;min-width:0}
+.panel h2{margin:0;font-size:16px;line-height:1.3}
+.panel ul,.panel ol{margin:0;padding-left:18px;font-size:14px;line-height:1.45}
+.panel p{margin:0;font-size:14px;line-height:1.45}
+.kpi{font-size:44px;font-weight:600;line-height:1;align-self:start}
+.kpi small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:8px;line-height:1.4}
+
+/* Résumé exécutif : Situation, Complication, Résolution. */
+[data-block]{border-top:3px solid var(--neutral);padding-top:12px;font-size:15px;line-height:1.45}
+[data-block] h2{margin:0 0 8px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+[data-block] p,[data-block] ul{margin:0 0 8px}
+[data-block] ul{padding-left:18px}
+[data-block="complication"]{border-color:var(--neg)}
+[data-block="resolution"]{border-color:var(--accent);background:var(--shade);padding:12px}
+[data-block="resolution"] h2{color:var(--accent)}
+
+/* Tableaux */
+table{border-collapse:collapse;width:100%;font-size:14px;align-self:start}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding:8px 10px;vertical-align:bottom}
+thead tr:first-child th[colspan]{text-align:center;border-bottom:1px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:600;border-top:2px solid var(--ink);border-bottom:0}
+tr.on td{background:var(--shade)}
+td[data-bar]{background:linear-gradient(90deg,var(--forecast) calc(var(--bar)*100%),transparent 0) no-repeat 0 50%/100% 60%;font-variant-numeric:tabular-nums}
+td[data-level] .level{letter-spacing:2px;color:var(--accent);white-space:nowrap}
+.legend{display:flex;gap:18px;list-style:none;margin:0;padding:0;font-size:12px;color:var(--muted);align-self:end}
+.legend li{border:0!important}
+.legend li::before{content:"";display:inline-block;width:10px;height:10px;margin-right:6px;background:var(--c,var(--neutral));vertical-align:-1px}
+
+/* Diapositive conceptuelle : flux horizontal ou grille de boîtes. */
+.flow{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:40px;align-items:stretch}
+.flow .box{position:relative}
+.flow .box:not(:last-child)::after{content:"";position:absolute;right:-28px;top:50%;margin-top:-10px;border:10px solid transparent;border-left:14px solid var(--s4)}
+.boxes{display:grid;gap:16px;align-content:start}
+.boxes.cols-2{grid-template-columns:repeat(2,1fr)}
+.boxes.cols-3{grid-template-columns:repeat(3,1fr)}
+.boxes.cols-4{grid-template-columns:repeat(4,1fr)}
+.box{border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:14px;line-height:1.45}
+.box h3{margin:0 0 6px;font-size:15px}
+.box ul{margin:0;padding-left:18px}
+.box.on{border-color:var(--accent);background:var(--shade)}
+.box .tag{display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--accent);padding:2px 6px;border-radius:3px;margin-bottom:6px}
+.note{font-size:12px;color:var(--muted)}
+
+/* Contrôle */
+.lint-bad{outline:3px solid var(--neg);outline-offset:-3px}
+#lint{position:fixed;left:12px;bottom:12px;max-width:520px;background:#fff;border:2px solid var(--neg);padding:10px 12px;font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:0;z-index:9}
+
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{background:#fff}
+  .stage{position:static;display:block}
+  .deck{transform:none!important;width:var(--w);height:auto}
+  section.slide{position:relative;visibility:visible;break-after:page;page-break-after:always}
+  #lint{display:none}
+}
+</style>
+</head>
+<body>
+<div class="stage"><main class="deck">
+
+<!-- Écris les slides ici, dans l'ordre du squelette de storyline.md. -->
+
+</main></div>
+<pre id="lint" hidden></pre>
+<script>
+(function () {
+  'use strict';
+  var W = 1280, H = 720, cfg = {};
+  try { cfg = JSON.parse(document.getElementById('deck-config').textContent); } catch (e) { console.error('deck-config invalide', e); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* Le script génère l'en-tête, le corps et le pied. Ils sont identiques et immobiles sur chaque slide. */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('main.deck > section.slide'));
+  if (!slides.length) { document.querySelector('.stage').innerHTML = '<p style="color:#fff;font-size:18px;max-width:640px;line-height:1.5">Gabarit vide. Copie ce fichier dans le dossier de travail, puis écris une &lt;section class="slide"&gt; par ligne du squelette de storyline.md. Voir references/gabarit.md.</p>'; return; }
+  slides.forEach(function (s, i) {
+    var layout = s.dataset.layout || '', bare = layout === 'cover' || layout === 'divider', statement = layout === 'statement';
+    var h1 = s.querySelector(':scope > h1');
+    var body = document.createElement('div'); body.className = 'body';
+    Array.prototype.slice.call(s.childNodes).forEach(function (n) { if (bare || statement || n !== h1) body.appendChild(n); });
+    if (!bare) {
+      var header = document.createElement('header'), top = document.createElement('div'); top.className = 'top';
+      var tr = document.createElement('div'); tr.className = 'tracker'; tr.textContent = s.dataset.section || ''; top.appendChild(tr);
+      if (s.dataset.frame && cfg.frames && Object.keys(cfg.frames).length) {
+        var nav = document.createElement('nav'); nav.className = 'frames';
+        Object.keys(cfg.frames).forEach(function (k) {
+          var b = document.createElement('span'); b.className = 'frame' + (k === s.dataset.frame ? ' on' : ''); b.textContent = k + ' ' + cfg.frames[k]; nav.appendChild(b);
+        });
+        top.appendChild(nav);
+      }
+      header.appendChild(top); if (h1 && !statement) header.appendChild(h1); s.appendChild(header);
+    }
+    s.appendChild(body);
+    var footer = document.createElement('footer');
+    var src = s.dataset.source ? (cfg.sourceLabel || 'Source') + ' : ' + s.dataset.source : '';
+    footer.innerHTML = '<span class="source">' + esc(src) + '</span><span class="foot">' + esc(cfg.footer || '') + '</span><span class="num">' + (i + 1) + '</span>';
+    s.appendChild(footer);
+  });
+
+  /* Tableau combiné : data-bar (0 à 1) donne une micro-barre, data-level (0 à 5) donne un niveau en points. */
+  Array.prototype.forEach.call(document.querySelectorAll('td[data-bar]'), function (td) {
+    td.style.setProperty('--bar', Math.max(0, Math.min(1, parseFloat(td.dataset.bar) || 0)));
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('td[data-level]'), function (td) {
+    var n = Math.max(0, Math.min(5, parseInt(td.dataset.level, 10) || 0)), sp = document.createElement('span');
+    sp.className = 'level'; sp.textContent = new Array(n + 1).join('●') + new Array(5 - n + 1).join('○'); td.appendChild(sp);
+  });
+
+  /* Navigation, mise à l'échelle, contrôle de débordement. */
+  var cur = 0, deck = document.querySelector('.deck');
+  function show(i) { cur = Math.max(0, Math.min(slides.length - 1, i)); slides.forEach(function (s, k) { s.classList.toggle('on', k === cur); }); history.replaceState(null, '', '#' + (cur + 1)); }
+  function fit() { deck.style.transform = 'scale(' + Math.min(innerWidth / W, innerHeight / H) + ')'; }
+  function lint() {
+    var out = [];
+    slides.forEach(function (s, i) {
+      Array.prototype.forEach.call(s.querySelectorAll('.lint-bad'), function (e) { e.classList.remove('lint-bad'); });
+      var h1 = s.querySelector('h1'), b = s.querySelector('.body');
+      if (h1 && h1.scrollHeight > h1.clientHeight + 1) { out.push('Slide ' + (i + 1) + ' : le titre dépasse deux lignes'); h1.classList.add('lint-bad'); }
+      if (b && (b.scrollHeight > b.clientHeight + 1 || b.scrollWidth > b.clientWidth + 1)) { out.push('Slide ' + (i + 1) + ' : le corps déborde'); b.classList.add('lint-bad'); }
+      Array.prototype.forEach.call(s.querySelectorAll('figure'), function (f) {
+        if (!f.querySelector('svg, img, table')) { out.push('Slide ' + (i + 1) + ' : emplacement de visuel vide'); f.classList.add('lint-bad'); }
+      });
+    });
+    var p = document.getElementById('lint'); p.hidden = false; p.textContent = out.length ? out.join('\n') : 'OK : aucun débordement.';
+    return out;
+  }
+  window.deckLint = lint;
+  addEventListener('resize', fit);
+  addEventListener('keydown', function (e) {
+    if (['ArrowRight', ' ', 'PageDown', 'ArrowDown'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur + 1); }
+    else if (['ArrowLeft', 'PageUp', 'ArrowUp'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur - 1); }
+    else if (e.key === 'Home') show(0); else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'l' || e.key === 'L') lint();
+  });
+  addEventListener('hashchange', function () { show((parseInt(location.hash.slice(1), 10) || 1) - 1); });
+  fit();
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+  if (/lint/.test(location.search)) requestAnimationFrame(function () { requestAnimationFrame(lint); });
+})();
+</script>
+</body>
+</html>
